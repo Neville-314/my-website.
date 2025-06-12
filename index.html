@@ -3,10 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MindFirst | Compassionate Mental Health Support</title>
+<title>MindWell | Mental Health Support</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-/* === GLOBAL STYLES === */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 :root {
 --primary: #4a6fa5;
 --secondary: #6b8cbc;
@@ -15,17 +21,9 @@
 --dark: #343a40;
 --crisis: #e74c3c;
 --success: #2ecc71;
---warning: #f39c12;
 --therapy: #9b59b6;
 --peer: #3498db;
 --resource: #1abc9c;
-}
-
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -34,20 +32,14 @@ color: #333;
 line-height: 1.6;
 position: relative;
 min-height: 100vh;
+padding-bottom: 100px;
 }
 
-.container {
-width: 90%;
-max-width: 1200px;
-margin: 0 auto;
-padding: 0 15px;
-}
-
-/* === CRISIS BANNER (Top of every page) === */
+/* Header & Navigation */
 .crisis-banner {
 background-color: var(--crisis);
 color: white;
-padding: 10px 0;
+padding: 12px 0;
 text-align: center;
 font-weight: 600;
 position: sticky;
@@ -58,16 +50,16 @@ z-index: 1000;
 .crisis-banner a {
 color: white;
 text-decoration: underline;
-margin: 0 5px;
+margin: 0 8px;
 }
 
-/* === HEADER & NAVIGATION === */
 header {
 background-color: white;
-box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+box-shadow: 0 2px 15px rgba(0,0,0,0.1);
 position: sticky;
 top: 38px;
 z-index: 100;
+padding: 0 5%;
 }
 
 .header-container {
@@ -75,10 +67,12 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 15px 0;
+max-width: 1200px;
+margin: 0 auto;
 }
 
 .logo {
-font-size: 24px;
+font-size: 28px;
 font-weight: 700;
 color: var(--primary);
 display: flex;
@@ -86,12 +80,9 @@ align-items: center;
 }
 
 .logo i {
-margin-right: 10px;
+margin-right: 12px;
 color: var(--accent);
-}
-
-.logo span {
-color: var(--accent);
+font-size: 32px;
 }
 
 nav ul {
@@ -110,36 +101,759 @@ font-weight: 500;
 transition: color 0.3s;
 display: flex;
 align-items: center;
+font-size: 17px;
 }
 
 nav a i {
-margin-right: 5px;
+margin-right: 8px;
 }
 
 nav a:hover {
 color: var(--primary);
 }
 
-/* === MAIN CONTENT SECTIONS === */
+/* Hero Section */
 .hero {
 background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-padding: 80px 0;
+padding: 100px 5% 80px;
 text-align: center;
 position: relative;
-overflow: hidden;
-}
-
-.hero::before {
-content: "";
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 Q50,20 100,0 L100,100 Q50,80 0,100 Z" fill="rgba(255,255,255,0.3)"/></svg>');
-background-size: cover;
 }
 
 .hero-content {
+max-width: 800px;
+margin: 0 auto;
 position: relative;
-z
+z-index: 2;
+}
+
+.hero h1 {
+font-size: 42px;
+margin-bottom: 25px;
+color: var(--primary);
+line-height: 1.2;
+}
+
+.hero p {
+font-size: 20px;
+margin: 0 auto 35px;
+color: #444;
+max-width: 700px;
+}
+
+/* Services Section */
+.services {
+padding: 80px 5%;
+}
+
+.section-title {
+text-align: center;
+margin-bottom: 50px;
+color: var(--primary);
+position: relative;
+font-size: 36px;
+}
+
+.section-title::after {
+content: "";
+display: block;
+width: 100px;
+height: 5px;
+background: var(--accent);
+margin: 15px auto;
+border-radius: 3px;
+}
+
+.services-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 35px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.service-card {
+background: white;
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+transition: transform 0.3s, box-shadow 0.3s;
+position: relative;
+border-top: 5px solid;
+}
+
+.service-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.service-card.therapy {
+border-top-color: var(--therapy);
+}
+
+.service-card.peer {
+border-top-color: var(--peer);
+}
+
+.service-card.resource {
+border-top-color: var(--resource);
+}
+
+.service-content {
+padding: 30px;
+}
+
+.service-icon {
+font-size: 48px;
+margin-bottom: 25px;
+display: inline-block;
+width: 90px;
+height: 90px;
+line-height: 90px;
+text-align: center;
+border-radius: 50%;
+background: rgba(74, 111, 165, 0.1);
+}
+
+.service-card h3 {
+margin-bottom: 20px;
+color: var(--primary);
+font-size: 26px;
+}
+
+.service-card p {
+margin-bottom: 25px;
+color: #555;
+font-size: 17px;
+}
+
+.btn {
+display: inline-block;
+background-color: var(--primary);
+color: white;
+padding: 15px 32px;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+font-weight: 600;
+transition: all 0.3s;
+text-decoration: none;
+font-size: 17px;
+box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+}
+
+.btn:hover {
+background-color: var(--secondary);
+transform: translateY(-3px);
+box-shadow: 0 8px 20px rgba(74, 111, 165, 0.4);
+}
+
+.btn-therapy {
+background-color: var(--therapy);
+box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
+}
+
+.btn-peer {
+background-color: var(--peer);
+box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-resource {
+background-color: var(--resource);
+box-shadow: 0 5px 15px rgba(26, 188, 156, 0.3);
+}
+
+/* AI Chat Assistant */
+.ai-assistant {
+position: fixed;
+bottom: 30px;
+right: 30px;
+z-index: 1000;
+}
+
+.ai-toggle {
+width: 70px;
+height: 70px;
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 28px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.ai-toggle:hover {
+transform: scale(1.1) rotate(10deg);
+box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.ai-chat-box {
+width: 350px;
+height: 500px;
+background: white;
+border-radius: 20px;
+box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+display: none;
+flex-direction: column;
+overflow: hidden;
+position: absolute;
+bottom: 85px;
+right: 0;
+}
+
+.ai-header {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+padding: 20px;
+text-align: center;
+font-size: 20px;
+font-weight: 600;
+}
+
+.ai-messages {
+flex: 1;
+padding: 20px;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.message {
+max-width: 80%;
+padding: 15px;
+border-radius: 18px;
+font-size: 15px;
+line-height: 1.5;
+}
+
+.ai-message {
+background: #e9ecef;
+align-self: flex-start;
+border-bottom-left-radius: 5px;
+}
+
+.user-message {
+background: var(--peer);
+color: white;
+align-self: flex-end;
+border-bottom-right-radius: 5px;
+}
+
+.ai-input {
+display: flex;
+padding: 15px;
+background: #f8f9fa;
+border-top: 1px solid #eee;
+}
+
+.ai-input input {
+flex: 1;
+padding: 12px 15px;
+border: 1px solid #ddd;
+border-radius: 25px;
+font-size: 15px;
+outline: none;
+}
+
+.ai-input button {
+background: var(--primary);
+color: white;
+border: none;
+border-radius: 50%;
+width: 45px;
+height: 45px;
+margin-left: 10px;
+cursor: pointer;
+font-size: 18px;
+transition: background 0.3s;
+}
+
+.ai-input button:hover {
+background: var(--secondary);
+}
+
+/* Contact Section */
+.contact-section {
+background: white;
+padding: 80px 5%;
+}
+
+.contact-container {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 40px;
+}
+
+.contact-info {
+padding: 30px;
+background: #f9f9f9;
+border-radius: 15px;
+box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.contact-info h3 {
+margin-bottom: 25px;
+color: var(--primary);
+font-size: 26px;
+position: relative;
+padding-bottom: 15px;
+}
+
+.contact-info h3::after {
+content: "";
+position: absolute;
+bottom: 0;
+left: 0;
+width: 60px;
+height: 4px;
+background: var(--accent);
+}
+
+.contact-item {
+display: flex;
+align-items: flex-start;
+margin-bottom: 25px;
+}
+
+.contact-item i {
+font-size: 24px;
+color: var(--primary);
+margin-right: 15px;
+min-width: 30px;
+}
+
+.contact-text h4 {
+margin-bottom: 5px;
+color: #444;
+}
+
+.contact-text p, .contact-text a {
+color: #666;
+text-decoration: none;
+font-size: 17px;
+transition: color 0.3s;
+}
+
+.contact-text a:hover {
+color: var(--primary);
+text-decoration: underline;
+}
+
+/* Footer */
+footer {
+background-color: var(--dark);
+color: white;
+padding: 60px 5% 30px;
+position: absolute;
+bottom: 0;
+width: 100%;
+}
+
+.footer-content {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 40px;
+margin-bottom: 40px;
+}
+
+.footer-section h3 {
+margin-bottom: 20px;
+color: var(--accent);
+font-size: 22px;
+position: relative;
+padding-bottom: 10px;
+}
+
+.footer-section h3::after {
+content: "";
+position: absolute;
+bottom: 0;
+left: 0;
+width: 50px;
+height: 3px;
+background-color: var(--accent);
+}
+
+.footer-links {
+list-style: none;
+}
+
+.footer-links li {
+margin-bottom: 12px;
+}
+
+.footer-links a {
+color: #ddd;
+text-decoration: none;
+transition: color 0.3s;
+display: flex;
+align-items: center;
+font-size: 16px;
+}
+
+.footer-links a i {
+margin-right: 10px;
+width: 20px;
+text-align: center;
+}
+
+.footer-links a:hover {
+color: white;
+}
+
+.copyright {
+text-align: center;
+padding-top: 30px;
+border-top: 1px solid #444;
+color: #aaa;
+font-size: 15px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+.header-container {
+flex-direction: column;
+}
+
+nav ul {
+margin-top: 20px;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+nav li {
+margin: 8px 15px;
+}
+
+.hero h1 {
+font-size: 32px;
+}
+
+.hero p {
+font-size: 18px;
+}
+
+.ai-chat-box {
+width: 300px;
+height: 450px;
+}
+}
+</style>
+</head>
+<body>
+<!-- Crisis Banner -->
+<div class="crisis-banner">
+<i class="fas fa-exclamation-circle"></i> In crisis? Call <a href="tel:988">988 Suicide & Crisis Lifeline</a> |
+Text <a href="sms:741741">HOME to 741741</a> |
+International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
+</div>
+
+<!-- Header -->
+<header>
+<div class="header-container">
+<div class="logo"><i class="fas fa-brain"></i>MindWell</div>
+<nav>
+<ul>
+<li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+<li><a href="#services"><i class="fas fa-hands-helping"></i> Services</a></li>
+<li><a href="#resources"><i class="fas fa-book"></i> Resources</a></li>
+<li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<!-- Hero Section -->
+<section id="home" class="hero">
+<div class="hero-content">
+<h1>Your Mental Wellness Journey Starts Here</h1>
+<p>Professional support, compassionate community, and evidence-based resources for your mental health journey. Accessible to everyone, anytime.</p>
+<a href="#services" class="btn">Explore Our Services</a>
+</div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="services">
+<h2 class="section-title">Our Support Services</h2>
+<div class="services-grid">
+<!-- Therapy -->
+<div class="service-card therapy">
+<div class="service-content">
+<div class="service-icon"><i class="fas fa-user-md"></i></div>
+<h3>Professional Therapy</h3>
+<p>Connect with licensed therapists via secure video sessions. Covered by most insurance plans with flexible scheduling.</p>
+<button class="btn btn-therapy">Book a Session</button>
+</div>
+</div>
+
+<!-- Peer Support -->
+<div class="service-card peer">
+<div class="service-content">
+<div class="service-icon"><i class="fas fa-comments"></i></div>
+<h3>Peer Support Network</h3>
+<p>24/7 chat with trained supporters who understand mental health challenges. Anonymously share and get support.</p>
+<button class="btn btn-peer">Connect Now</button>
+</div>
+</div>
+
+<!-- Resources -->
+<div class="service-card resource">
+<div class="service-content">
+<div class="service-icon"><i class="fas fa-book-open"></i></div>
+<h3>Resource Library</h3>
+<p>Evidence-based tools, courses, and articles curated by mental health professionals. Personalized recommendations.</p>
+<a href="#resources" class="btn btn-resource">Explore Resources</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="contact-section">
+<h2 class="section-title">Contact Us</h2>
+<div class="contact-container">
+<div class="contact-info">
+<h3>Get In Touch</h3>
+
+<div class="contact-item">
+<i class="fas fa-envelope"></i>
+<div class="contact-text">
+<h4>Email Support</h4>
+<a href="mailto:224173@ais.edu.hk">224173@ais.edu.hk</a>
+<p>Response within 24 hours</p>
+</div>
+</div>
+
+<div class="contact-item">
+<i class="fas fa-phone-alt"></i>
+<div class="contact-text">
+<h4>Phone Support</h4>
+<a href="tel:+85212345678">+852 1234 5678</a>
+<p>Monday-Friday, 9am-6pm</p>
+</div>
+</div>
+
+<div class="contact-item">
+<i class="fas fa-map-marker-alt"></i>
+<div class="contact-text">
+<h4>Our Location</h4>
+<p>123 Wellness Avenue<br>Mental Health District<br>Hong Kong</p>
+</div>
+</div>
+</div>
+
+<div class="contact-info">
+<h3>Send Us a Message</h3>
+<form style="margin-top: 20px;">
+<div style="margin-bottom: 20px;">
+<input type="text" placeholder="Your Name" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
+</div>
+
+<div style="margin-bottom: 20px;">
+<input type="email" placeholder="Your Email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
+</div>
+
+<div style="margin-bottom: 20px;">
+<textarea placeholder="Your Message" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; height: 150px;"></textarea>
+</div>
+
+<button class="btn" style="width: 100%;">Send Message</button>
+</form>
+</div>
+</div>
+</section>
+
+<!-- AI Chat Assistant -->
+<div class="ai-assistant">
+<div class="ai-toggle" id="aiToggle">
+<i class="fas fa-robot"></i>
+</div>
+
+<div class="ai-chat-box" id="aiChatBox">
+<div class="ai-header">
+MindWell Assistant
+</div>
+<div class="ai-messages" id="aiMessages">
+<div class="message ai-message">
+Hello! I'm your MindWell assistant. How can I help you today? 😊
+</div>
+<div class="message ai-message">
+You can ask me about mental health resources, coping strategies, or our services.
+</div>
+</div>
+<div class="ai-input">
+<input type="text" id="userInput" placeholder="Type your message...">
+<button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+</div>
+</div>
+</div>
+
+<!-- Footer -->
+<footer>
+<div class="footer-content">
+<div class="footer-section">
+<h3>MindWell</h3>
+<p>Providing compassionate mental health support since 2023. We're here for you every step of the way.</p>
+<p style="margin-top: 15px;"><i class="fas fa-envelope"></i> 224173@ais.edu.hk</p>
+</div>
+
+<div class="footer-section">
+<h3>Quick Links</h3>
+<ul class="footer-links">
+<li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+<li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
+<li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
+<li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+</ul>
+</div>
+
+<div class="footer-section">
+<h3>Crisis Resources</h3>
+<ul class="footer-links">
+<li><a href="tel:988"><i class="fas fa-phone-alt"></i> 988 Lifeline</a></li>
+<li><a href="#"><i class="fas fa-comment-alt"></i> Crisis Text Line</a></li>
+<li><a href="#"><i class="fas fa-globe"></i> International Helplines</a></li>
+</ul>
+</div>
+
+<div class="footer-section">
+<h3>Connect With Us</h3>
+<ul class="footer-links">
+<li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+<li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+<li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+<li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+</ul>
+</div>
+</div>
+
+<div class="copyright">
+<p>&copy; 2023 MindWell Mental Health Support. Contact us at 224173@ais.edu.hk. This is not a replacement for emergency care.</p>
+</div>
+</footer>
+
+<script>
+// AI Chat Assistant Functionality
+const aiToggle = document.getElementById('aiToggle');
+const aiChatBox = document.getElementById('aiChatBox');
+const aiMessages = document.getElementById('aiMessages');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendMessage');
+
+// Toggle chat box visibility
+aiToggle.addEventListener('click', () => {
+aiChatBox.style.display = aiChatBox.style.display === 'flex' ? 'none' : 'flex';
+});
+
+// Send message functionality
+sendBtn.addEventListener('click', sendMessage);
+userInput.addEventListener('keypress', (e) => {
+if (e.key === 'Enter') sendMessage();
+});
+
+function sendMessage() {
+const message = userInput.value.trim();
+if (message) {
+// Add user message to chat
+addMessage(message, 'user');
+userInput.value = '';
+
+// Process message and generate AI response
+setTimeout(() => {
+const response = generateAIResponse(message);
+addMessage(response, 'ai');
+}, 800);
+}
+}
+
+function addMessage(text, sender) {
+const messageDiv = document.createElement('div');
+messageDiv.classList.add('message');
+messageDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
+messageDiv.textContent = text;
+aiMessages.appendChild(messageDiv);
+
+// Scroll to bottom
+aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+function generateAIResponse(message) {
+const lowerMsg = message.toLowerCase();
+
+// Greetings
+if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
+return "Hello! How can I assist you with your mental wellness today? 😊";
+}
+
+// Services
+if (lowerMsg.includes('service') || lowerMsg.includes('help') || lowerMsg.includes('support')) {
+return "We offer professional therapy, peer support, and a resource library. You can access these services through our website or contact us at 224173@ais.edu.hk for assistance.";
+}
+
+// Contact
+if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach')) {
+return "You can reach us via email at 224173@ais.edu.hk or call +852 1234 5678 during business hours. Our team typically responds within 24 hours.";
+}
+
+// Anxiety
+if (lowerMsg.includes('anxious') || lowerMsg.includes('anxiety') || lowerMsg.includes('nervous')) {
+return "Anxiety can be challenging. Try deep breathing exercises: inhale for 4 seconds, hold for 4, exhale for 6. We also have anxiety resources in our library. Would you like me to direct you there?";
+}
+
+// Depression
+if (lowerMsg.includes('depress') || lowerMsg.includes('sad') || lowerMsg.includes('down')) {
+return "I'm sorry you're feeling this way. Remember that depression is treatable. Our therapists specialize in depression treatment. Would you like information about booking a session?";
+}
+
+// Resources
+if (lowerMsg.includes('resource') || lowerMsg.includes('material') || lowerMsg.includes('article')) {
+return "We have a comprehensive resource library with articles, videos, and tools on various mental health topics. You can access it through the 'Resources' section on our website.";
+}
+
+// Appointments
+if (lowerMsg.includes('appointment') || lowerMsg.includes('book') || lowerMsg.includes('schedule')) {
+return "You can book a therapy session through our website's 'Professional Therapy' section or by emailing 224173@ais.edu.hk with your availability and preferences.";
+}
+
+// Crisis
+if (lowerMsg.includes('emergency') || lowerMsg.includes('crisis') || lowerMsg.includes('urgent')) {
+return "If you're in crisis, please call 988 or your local emergency number immediately. For non-urgent support, our team at 224173@ais.edu.hk can assist during business hours.";
+}
+
+// Default response
+const responses = [
+"I'm here to help with your mental wellness journey. Can you tell me more about what you're looking for?",
+"I understand. Would you like information about our services or resources?",
+"Mental health is important. We have various support options available. How can I assist you?",
+"I recommend exploring our resource library or contacting our support team at 224173@ais.edu.hk for personalized assistance.",
+"Thank you for reaching out. Our team is available to help at 224173@ais.edu.hk if you need human support."
+];
+return responses[Math.floor(Math.random() * responses.length)];
+}
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function(e) {
+e.preventDefault();
+const target = document.querySelector(this.getAttribute('href'));
+if (target) {
+window.scrollTo({
+top: target.offsetTop - 100,
+behavior: 'smooth'
+});
+}
+});
+});
+</script>
+</body>
+</html>
