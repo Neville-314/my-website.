@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MindConnect | Peer Mental Health Support</title>
+<title>MindSupport | Mental Health Community</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
@@ -25,6 +25,7 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 --peer: #3498db;
 --community: #1abc9c;
 --forum-bg: #f5f7fa;
+--ai-bg: #e3f2fd;
 }
 
 body {
@@ -32,6 +33,7 @@ background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%);
 color: #333;
 line-height: 1.6;
 min-height: 100vh;
+position: relative;
 }
 
 .crisis-banner {
@@ -284,77 +286,21 @@ text-align: center;
 
 .forum-posts {
 padding: 30px;
-}
-
-.post {
-background: white;
-border-radius: 12px;
-padding: 25px;
-margin-bottom: 25px;
-box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-border-left: 4px solid var(--community);
-transition: transform 0.3s;
-}
-
-.post:hover {
-transform: translateX(5px);
-}
-
-.post-header {
-display: flex;
-align-items: center;
-margin-bottom: 15px;
-}
-
-.avatar {
-width: 50px;
-height: 50px;
-border-radius: 50%;
-background: var(--community);
-color: white;
+min-height: 300px;
 display: flex;
 align-items: center;
 justify-content: center;
-font-weight: bold;
-font-size: 20px;
-margin-right: 15px;
+flex-direction: column;
 }
 
-.post-info h4 {
-font-size: 18px;
-color: var(--dark);
-}
-
-.post-info p {
+.empty-community {
+text-align: center;
 color: #777;
-font-size: 14px;
 }
 
-.post-content {
+.empty-community i {
+font-size: 60px;
 margin-bottom: 20px;
-font-size: 16px;
-line-height: 1.6;
-}
-
-.post-actions {
-display: flex;
-gap: 15px;
-}
-
-.action-btn {
-display: flex;
-align-items: center;
-color: #777;
-text-decoration: none;
-font-size: 14px;
-transition: color 0.3s;
-}
-
-.action-btn i {
-margin-right: 5px;
-}
-
-.action-btn:hover {
 color: var(--community);
 }
 
@@ -387,9 +333,54 @@ height: 150px;
 resize: vertical;
 }
 
-.contact-section {
+.policies-section {
 padding: 80px 5%;
 background: white;
+}
+
+.policies-container {
+max-width: 1000px;
+margin: 0 auto;
+}
+
+.policy-card {
+background: white;
+border-radius: 15px;
+padding: 40px;
+margin-bottom: 40px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+border-left: 5px solid var(--community);
+}
+
+.policy-card h3 {
+margin-bottom: 20px;
+color: var(--primary);
+font-size: 28px;
+display: flex;
+align-items: center;
+}
+
+.policy-card h3 i {
+margin-right: 15px;
+color: var(--community);
+}
+
+.policy-content {
+line-height: 1.8;
+color: #555;
+}
+
+.policy-content ul {
+margin: 20px 0 20px 30px;
+}
+
+.policy-content li {
+margin-bottom: 10px;
+}
+
+.contact-section {
+padding: 80px 5%;
+background: var(--forum-bg);
 text-align: center;
 }
 
@@ -397,7 +388,7 @@ text-align: center;
 max-width: 600px;
 margin: 0 auto;
 padding: 40px;
-background: var(--forum-bg);
+background: white;
 border-radius: 15px;
 box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
@@ -417,6 +408,14 @@ color: var(--primary);
 font-size: 32px;
 font-weight: 700;
 color: var(--community);
+margin: 20px 0;
+display: block;
+}
+
+.email-contact {
+font-size: 24px;
+font-weight: 600;
+color: var(--primary);
 margin: 20px 0;
 display: block;
 }
@@ -491,6 +490,122 @@ max-width: 1200px;
 margin: 0 auto;
 }
 
+/* AI Assistant */
+.ai-assistant {
+position: fixed;
+bottom: 30px;
+right: 30px;
+z-index: 1000;
+}
+
+.ai-toggle {
+width: 70px;
+height: 70px;
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-size: 28px;
+box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+cursor: pointer;
+transition: all 0.3s;
+}
+
+.ai-toggle:hover {
+transform: scale(1.1) rotate(10deg);
+box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+}
+
+.ai-chat-box {
+width: 350px;
+height: 500px;
+background: white;
+border-radius: 20px;
+box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+display: none;
+flex-direction: column;
+overflow: hidden;
+position: absolute;
+bottom: 85px;
+right: 0;
+}
+
+.ai-header {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+padding: 20px;
+text-align: center;
+font-size: 20px;
+font-weight: 600;
+}
+
+.ai-messages {
+flex: 1;
+padding: 20px;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+gap: 15px;
+background: var(--ai-bg);
+}
+
+.message {
+max-width: 80%;
+padding: 15px;
+border-radius: 18px;
+font-size: 15px;
+line-height: 1.5;
+}
+
+.ai-message {
+background: white;
+align-self: flex-start;
+border-bottom-left-radius: 5px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.user-message {
+background: var(--peer);
+color: white;
+align-self: flex-end;
+border-bottom-right-radius: 5px;
+}
+
+.ai-input {
+display: flex;
+padding: 15px;
+background: #f8f9fa;
+border-top: 1px solid #eee;
+}
+
+.ai-input input {
+flex: 1;
+padding: 12px 15px;
+border: 1px solid #ddd;
+border-radius: 25px;
+font-size: 15px;
+outline: none;
+}
+
+.ai-input button {
+background: var(--primary);
+color: white;
+border: none;
+border-radius: 50%;
+width: 45px;
+height: 45px;
+margin-left: 10px;
+cursor: pointer;
+font-size: 18px;
+transition: background 0.3s;
+}
+
+.ai-input button:hover {
+background: var(--secondary);
+}
+
 @media (max-width: 768px) {
 .header-container {
 flex-direction: column;
@@ -514,8 +629,13 @@ font-size: 32px;
 font-size: 18px;
 }
 
-.phone-number {
+.phone-number, .email-contact {
 font-size: 24px;
+}
+
+.ai-chat-box {
+width: 300px;
+height: 450px;
 }
 }
 </style>
@@ -531,12 +651,12 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <!-- Header -->
 <header>
 <div class="header-container">
-<div class="logo"><i class="fas fa-hands-helping"></i>MindConnect</div>
+<div class="logo"><i class="fas fa-hands-helping"></i>MindSupport</div>
 <nav>
 <ul>
 <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-<li><a href="#services"><i class="fas fa-comments"></i> Services</a></li>
 <li><a href="#community"><i class="fas fa-users"></i> Community</a></li>
+<li><a href="#policies"><i class="fas fa-shield-alt"></i> Guidelines</a></li>
 <li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li>
 </ul>
 </nav>
@@ -552,42 +672,6 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 </div>
 </section>
 
-<!-- Services Section -->
-<section id="services" class="services">
-<h2 class="section-title">Our Support Services</h2>
-<div class="services-grid">
-<!-- Therapy -->
-<div class="service-card therapy">
-<div class="service-content">
-<div class="service-icon"><i class="fas fa-user-md"></i></div>
-<h3>Professional Guidance</h3>
-<p>Connect with licensed therapists for personalized support through secure video sessions.</p>
-<button class="btn">Learn More</button>
-</div>
-</div>
-
-<!-- Peer Support -->
-<div class="service-card peer">
-<div class="service-content">
-<div class="service-icon"><i class="fas fa-comments"></i></div>
-<h3>Peer Support Network</h3>
-<p>Connect with others who understand your journey in our 24/7 moderated support network.</p>
-<a href="#community" class="btn">Connect Now</a>
-</div>
-</div>
-
-<!-- Community Support -->
-<div class="service-card community">
-<div class="service-content">
-<div class="service-icon"><i class="fas fa-users"></i></div>
-<h3>Community Support</h3>
-<p>Join groups and forums to share experiences and find support from others on similar journeys.</p>
-<a href="#community" class="btn">Join Community</a>
-</div>
-</div>
-</div>
-</section>
-
 <!-- Community Section -->
 <section id="community" class="community-section">
 <h2 class="section-title">Community Support Forum</h2>
@@ -598,64 +682,16 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 </div>
 
 <div class="forum-posts">
-<div class="post">
-<div class="post-header">
-<div class="avatar">A</div>
-<div class="post-info">
-<h4>Alex Morgan</h4>
-<p>Posted 3 hours ago in Anxiety Support</p>
-</div>
-</div>
-<div class="post-content">
-<p>I've been struggling with anxiety for the past few months. Does anyone have techniques that help when you feel a panic attack coming on? I'd really appreciate any advice or personal experiences.</p>
-</div>
-<div class="post-actions">
-<a href="#" class="action-btn"><i class="fas fa-heart"></i> 24</a>
-<a href="#" class="action-btn"><i class="fas fa-comment"></i> 8</a>
-<a href="#" class="action-btn"><i class="fas fa-share"></i> Share</a>
-</div>
-</div>
-
-<div class="post">
-<div class="post-header">
-<div class="avatar">J</div>
-<div class="post-info">
-<h4>Jamie Smith</h4>
-<p>Posted 1 day ago in Depression Support</p>
-</div>
-</div>
-<div class="post-content">
-<p>Today was really tough. Woke up with no energy or motivation. Just wanted to reach out to others who understand. How do you cope on days when everything feels overwhelming?</p>
-</div>
-<div class="post-actions">
-<a href="#" class="action-btn"><i class="fas fa-heart"></i> 42</a>
-<a href="#" class="action-btn"><i class="fas fa-comment"></i> 15</a>
-<a href="#" class="action-btn"><i class="fas fa-share"></i> Share</a>
-</div>
-</div>
-
-<div class="post">
-<div class="post-header">
-<div class="avatar">M</div>
-<div class="post-info">
-<h4>Maria Chen</h4>
-<p>Posted 2 days ago in Coping Strategies</p>
-</div>
-</div>
-<div class="post-content">
-<p>I've found mindfulness meditation really helpful for my stress levels. If anyone is interested, I'd be happy to share the 5-minute breathing exercise that works for me. It's made a big difference in my daily life.</p>
-</div>
-<div class="post-actions">
-<a href="#" class="action-btn"><i class="fas fa-heart"></i> 56</a>
-<a href="#" class="action-btn"><i class="fas fa-comment"></i> 22</a>
-<a href="#" class="action-btn"><i class="fas fa-share"></i> Share</a>
-</div>
+<div class="empty-community">
+<i class="fas fa-comment-slash"></i>
+<h3>Be the first to share your experience</h3>
+<p>Your story can help others feel less alone. Start the conversation.</p>
 </div>
 </div>
 
 <div class="new-post-form">
 <h3><i class="fas fa-pen"></i> Share Your Experience</h3>
-<form>
+<form id="communityForm">
 <div class="form-group">
 <input type="text" placeholder="Title of your post" required>
 </div>
@@ -664,6 +700,44 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 </div>
 <button type="submit" class="btn">Post to Community</button>
 </form>
+</div>
+</div>
+</section>
+
+<!-- Policies Section -->
+<section id="policies" class="policies-section">
+<h2 class="section-title">Community Guidelines & Safety</h2>
+<div class="policies-container">
+<div class="policy-card">
+<h3><i class="fas fa-book"></i> Community Guidelines</h3>
+<div class="policy-content">
+<p>Our community is built on mutual respect and support. To maintain a safe environment, we ask all members to follow these guidelines:</p>
+<ul>
+<li><strong>Be respectful and kind</strong> - Treat others with compassion and understanding</li>
+<li><strong>Maintain confidentiality</strong> - Do not share others' personal stories outside this community</li>
+<li><strong>Share from your own experience</strong> - Avoid giving medical or professional advice</li>
+<li><strong>No harassment or discrimination</strong> - We have zero tolerance for any form of hate speech</li>
+<li><strong>Use trigger warnings</strong> - When discussing sensitive topics, use content warnings</li>
+<li><strong>Respect boundaries</strong> - Do not pressure others to share more than they're comfortable with</li>
+</ul>
+<p>Violations of these guidelines may result in temporary suspension or permanent removal from the community.</p>
+</div>
+</div>
+
+<div class="policy-card">
+<h3><i class="fas fa-shield-alt"></i> Safety Policies</h3>
+<div class="policy-content">
+<p>Your safety is our top priority. Our platform includes these safety measures:</p>
+<ul>
+<li><strong>24/7 moderation</strong> - Our team monitors the community around the clock</li>
+<li><strong>Reporting system</strong> - Easily report concerning content with our reporting tools</li>
+<li><strong>Privacy controls</strong> - Choose what personal information you share</li>
+<li><strong>Crisis resources</strong> - Immediate access to emergency contacts when needed</li>
+<li><strong>Anonymity options</strong> - Participate using a pseudonym if preferred</li>
+<li><strong>Content review</strong> - All posts are reviewed before becoming public</li>
+</ul>
+<p>If you feel unsafe or encounter concerning behavior, please report it immediately using our reporting tools.</p>
+</div>
 </div>
 </div>
 </section>
@@ -677,9 +751,15 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 </div>
 <h2>We're Here to Help</h2>
 <p class="contact-text">Reach out to us anytime for support, questions, or guidance on your mental health journey.</p>
+
 <a href="tel:59582902" class="phone-number">
 <i class="fas fa-phone"></i> 5958 2902
 </a>
+
+<a href="mailto:224173@ais.edu.hk" class="email-contact">
+<i class="fas fa-envelope"></i> 224173@ais.edu.hk
+</a>
+
 <p>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm</p>
 </div>
 </section>
@@ -688,48 +768,180 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <footer>
 <div class="footer-content">
 <div class="footer-section">
-<h3>MindConnect</h3>
-<p>Providing compassionate mental health support through community connection since 2023.</p>
+<h3>MindSupport</h3>
+<p>Providing compassionate mental health support through community connection.</p>
+<p style="margin-top: 15px;">
+<i class="fas fa-envelope"></i> 224173@ais.edu.hk<br>
+<i class="fas fa-phone"></i> 5958 2902
+</p>
 </div>
 
 <div class="footer-section">
 <h3>Quick Links</h3>
 <ul class="footer-links">
 <li><a href="#home">Home</a></li>
-<li><a href="#services">Services</a></li>
 <li><a href="#community">Community</a></li>
+<li><a href="#policies">Guidelines</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
 </div>
 
 <div class="footer-section">
-<h3>Support Resources</h3>
+<h3>Resources</h3>
 <ul class="footer-links">
-<li><a href="#">Community Guidelines</a></li>
-<li><a href="#">Privacy Policy</a></li>
-<li><a href="#">Safety Information</a></li>
 <li><a href="#">Crisis Resources</a></li>
+<li><a href="#">Mental Health Tips</a></li>
+<li><a href="#">Therapist Directory</a></li>
+<li><a href="#">Self-Care Tools</a></li>
 </ul>
 </div>
 
 <div class="footer-section">
-<h3>Contact Us</h3>
+<h3>Connect</h3>
 <ul class="footer-links">
-<li><a href="tel:59582902"><i class="fas fa-phone"></i> 5958 2902</a></li>
-<li><a href="#"><i class="fas fa-envelope"></i> support@mindconnect.com</a></li>
-<li><a href="#"><i class="fas fa-map-marker-alt"></i> Mental Wellness Center</a></li>
+<li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+<li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+<li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+<li><a href="#"><i class="fab fa-youtube"></i> YouTube</a></li>
 </ul>
 </div>
 </div>
 
 <div class="copyright">
-<p>&copy; 2023 MindConnect Mental Health Support Community. We're here for you.</p>
+<p>&copy; 2023 MindSupport Mental Health Community. All rights reserved.</p>
 <p>If you're in crisis, please call emergency services immediately.</p>
 </div>
 </footer>
 
+<!-- AI Assistant -->
+<div class="ai-assistant">
+<div class="ai-toggle" id="aiToggle">
+<i class="fas fa-robot"></i>
+</div>
+
+<div class="ai-chat-box" id="aiChatBox">
+<div class="ai-header">
+MindSupport Assistant
+</div>
+<div class="ai-messages" id="aiMessages">
+<div class="message ai-message">
+Hello! I'm your MindSupport assistant. How can I help you today? 😊
+</div>
+<div class="message ai-message">
+You can ask me about mental health resources, community guidelines, or how to get support.
+</div>
+</div>
+<div class="ai-input">
+<input type="text" id="userInput" placeholder="Type your message...">
+<button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+</div>
+</div>
+</div>
+
 <script>
-// Smooth scrolling for navigation links
+// AI Assistant Functionality
+const aiToggle = document.getElementById('aiToggle');
+const aiChatBox = document.getElementById('aiChatBox');
+const aiMessages = document.getElementById('aiMessages');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendMessage');
+
+// Toggle chat box visibility
+aiToggle.addEventListener('click', () => {
+aiChatBox.style.display = aiChatBox.style.display === 'flex' ? 'none' : 'flex';
+});
+
+// Send message functionality
+sendBtn.addEventListener('click', sendMessage);
+userInput.addEventListener('keypress', (e) => {
+if (e.key === 'Enter') sendMessage();
+});
+
+function sendMessage() {
+const message = userInput.value.trim();
+if (message) {
+// Add user message to chat
+addMessage(message, 'user');
+userInput.value = '';
+
+// Process message and generate AI response
+setTimeout(() => {
+const response = generateAIResponse(message);
+addMessage(response, 'ai');
+}, 800);
+}
+}
+
+function addMessage(text, sender) {
+const messageDiv = document.createElement('div');
+messageDiv.classList.add('message');
+messageDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
+messageDiv.textContent = text;
+aiMessages.appendChild(messageDiv);
+
+// Scroll to bottom
+aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+function generateAIResponse(message) {
+const lowerMsg = message.toLowerCase();
+
+// Greetings
+if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
+return "Hello! How can I assist you with your mental wellness today? 😊";
+}
+
+// Community guidelines
+if (lowerMsg.includes('guideline') || lowerMsg.includes('rule') || lowerMsg.includes('policy')) {
+return "Our community guidelines emphasize respect, confidentiality, and safety. You can find the complete guidelines in the 'Community Guidelines' section of our website.";
+}
+
+// Contact
+if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('phone')) {
+return "You can reach us by phone at 5958 2902 or by email at 224173@ais.edu.hk. Our support team is available Monday-Friday 9am-6pm.";
+}
+
+// Safety
+if (lowerMsg.includes('safe') || lowerMsg.includes('report') || lowerMsg.includes('concern')) {
+return "Your safety is important. You can report concerning content using our reporting tools. For immediate safety concerns, please contact emergency services.";
+}
+
+// Crisis
+if (lowerMsg.includes('emergency') || lowerMsg.includes('crisis') || lowerMsg.includes('urgent')) {
+return "If you're in crisis, please call 988 or your local emergency number immediately. You can also text HOME to 741741 for crisis support.";
+}
+
+// Community
+if (lowerMsg.includes('community') || lowerMsg.includes('forum') || lowerMsg.includes('post')) {
+return "Our community forum is a safe space to share experiences. You can post your thoughts or questions in the 'Community Support' section. All posts are moderated for safety.";
+}
+
+// Default response
+const responses = [
+"I'm here to help with your mental wellness journey. Can you tell me more about what you need?",
+"I understand. Would you like information about our community guidelines or support resources?",
+"Mental health is important. We have various support options available. How can I assist you?",
+"Thank you for reaching out. Our team is available at 224173@ais.edu.hk if you need human support.",
+"I recommend checking our community guidelines for information on safe participation."
+];
+return responses[Math.floor(Math.random() * responses.length)];
+}
+
+// Form submission
+document.getElementById('communityForm').addEventListener('submit', function(e) {
+e.preventDefault();
+alert('Thank you for sharing with our community! Your post is being reviewed and will be visible soon.');
+this.reset();
+
+// Update community section
+document.querySelector('.empty-community').innerHTML = `
+<i class="fas fa-check-circle" style="color:#2ecc71"></i>
+<h3>Thank you for your post!</h3>
+<p>Your contribution is being reviewed and will be visible to the community soon.</p>
+`;
+});
+
+// Smooth scrolling for navigation
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 anchor.addEventListener('click', function(e) {
 e.preventDefault();
@@ -739,23 +951,10 @@ window.scrollTo({
 top: target.offsetTop - 100,
 behavior: 'smooth'
 });
+
+// Close AI chat if open
+aiChatBox.style.display = 'none';
 }
-});
-});
-
-// Form submission handling
-const forms = document.querySelectorAll('form');
-forms.forEach(form => {
-form.addEventListener('submit', function(e) {
-e.preventDefault();
-
-if (this.id === 'communityForm') {
-alert('Thank you for sharing with our community! Your post will be visible after moderation.');
-} else {
-alert('Thank you for your message! We will respond as soon as possible.');
-}
-
-this.reset();
 });
 });
 
@@ -769,22 +968,17 @@ threshold: 0.1
 const observer = new IntersectionObserver((entries) => {
 entries.forEach(entry => {
 if (entry.isIntersecting) {
-entry.target.classList.add('animated');
+entry.target.style.opacity = '1';
+entry.target.style.transform = 'translateY(0)';
 }
 });
 }, observerOptions);
 
-document.querySelectorAll('.service-card, .post, .contact-info').forEach(el => {
+document.querySelectorAll('.service-card, .policy-card, .contact-info').forEach(el => {
 el.style.opacity = '0';
 el.style.transform = 'translateY(20px)';
 el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 observer.observe(el);
-
-el.classList.add('animated');
-setTimeout(() => {
-el.style.opacity = '1';
-el.style.transform = 'translateY(0)';
-}, 300);
 });
 </script>
 </body>
