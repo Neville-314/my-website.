@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MindWell | Mental Health Support</title>
+<title>MindConnect | Peer Mental Health Support</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * {
@@ -23,19 +23,17 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 --success: #2ecc71;
 --therapy: #9b59b6;
 --peer: #3498db;
---resource: #1abc9c;
+--community: #1abc9c;
+--forum-bg: #f5f7fa;
 }
 
 body {
-background-color: #f0f4f8;
+background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%);
 color: #333;
 line-height: 1.6;
-position: relative;
 min-height: 100vh;
-padding-bottom: 100px;
 }
 
-/* Header & Navigation */
 .crisis-banner {
 background-color: var(--crisis);
 color: white;
@@ -45,21 +43,24 @@ font-weight: 600;
 position: sticky;
 top: 0;
 z-index: 1000;
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .crisis-banner a {
 color: white;
 text-decoration: underline;
 margin: 0 8px;
+font-weight: 500;
 }
 
 header {
-background-color: white;
-box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+background-color: rgba(255, 255, 255, 0.95);
+box-shadow: 0 2px 15px rgba(0,0,0,0.08);
 position: sticky;
 top: 38px;
 z-index: 100;
 padding: 0 5%;
+backdrop-filter: blur(5px);
 }
 
 .header-container {
@@ -81,7 +82,7 @@ align-items: center;
 
 .logo i {
 margin-right: 12px;
-color: var(--accent);
+color: var(--community);
 font-size: 32px;
 }
 
@@ -102,22 +103,34 @@ transition: color 0.3s;
 display: flex;
 align-items: center;
 font-size: 17px;
+position: relative;
+}
+
+nav a::after {
+content: '';
+position: absolute;
+bottom: -5px;
+left: 0;
+width: 0;
+height: 2px;
+background: var(--community);
+transition: width 0.3s;
+}
+
+nav a:hover::after {
+width: 100%;
 }
 
 nav a i {
 margin-right: 8px;
 }
 
-nav a:hover {
-color: var(--primary);
-}
-
-/* Hero Section */
 .hero {
-background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
 padding: 100px 5% 80px;
 text-align: center;
 position: relative;
+background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 Q50,100 100,0 L100,100 Q50,0 0,100 Z" fill="rgba(74, 111, 165, 0.05)"/></svg>') no-repeat bottom;
+background-size: cover;
 }
 
 .hero-content {
@@ -141,9 +154,29 @@ color: #444;
 max-width: 700px;
 }
 
-/* Services Section */
+.btn {
+display: inline-block;
+background: linear-gradient(135deg, var(--community) 0%, var(--primary) 100%);
+color: white;
+padding: 15px 32px;
+border: none;
+border-radius: 50px;
+cursor: pointer;
+font-weight: 600;
+transition: all 0.3s;
+text-decoration: none;
+font-size: 17px;
+box-shadow: 0 5px 15px rgba(26, 188, 156, 0.3);
+}
+
+.btn:hover {
+transform: translateY(-3px);
+box-shadow: 0 8px 20px rgba(26, 188, 156, 0.4);
+}
+
 .services {
 padding: 80px 5%;
+background-color: white;
 }
 
 .section-title {
@@ -159,7 +192,7 @@ content: "";
 display: block;
 width: 100px;
 height: 5px;
-background: var(--accent);
+background: var(--community);
 margin: 15px auto;
 border-radius: 3px;
 }
@@ -179,7 +212,7 @@ overflow: hidden;
 box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 transition: transform 0.3s, box-shadow 0.3s;
 position: relative;
-border-top: 5px solid;
+border: 1px solid #e9ecef;
 }
 
 .service-card:hover {
@@ -188,15 +221,15 @@ box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
 .service-card.therapy {
-border-top-color: var(--therapy);
+border-top: 5px solid var(--therapy);
 }
 
 .service-card.peer {
-border-top-color: var(--peer);
+border-top: 5px solid var(--peer);
 }
 
-.service-card.resource {
-border-top-color: var(--resource);
+.service-card.community {
+border-top: 5px solid var(--community);
 }
 
 .service-content {
@@ -212,7 +245,8 @@ height: 90px;
 line-height: 90px;
 text-align: center;
 border-radius: 50%;
-background: rgba(74, 111, 165, 0.1);
+background: rgba(26, 188, 156, 0.1);
+color: var(--community);
 }
 
 .service-card h3 {
@@ -227,233 +261,177 @@ color: #555;
 font-size: 17px;
 }
 
-.btn {
-display: inline-block;
-background-color: var(--primary);
-color: white;
-padding: 15px 32px;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-font-weight: 600;
-transition: all 0.3s;
-text-decoration: none;
-font-size: 17px;
-box-shadow: 0 5px 15px rgba(74, 111, 165, 0.3);
+.community-section {
+padding: 80px 5%;
+background-color: var(--forum-bg);
 }
 
-.btn:hover {
-background-color: var(--secondary);
-transform: translateY(-3px);
-box-shadow: 0 8px 20px rgba(74, 111, 165, 0.4);
+.forum-container {
+max-width: 1000px;
+margin: 0 auto;
+background: white;
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
-.btn-therapy {
-background-color: var(--therapy);
-box-shadow: 0 5px 15px rgba(155, 89, 182, 0.3);
-}
-
-.btn-peer {
-background-color: var(--peer);
-box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-}
-
-.btn-resource {
-background-color: var(--resource);
-box-shadow: 0 5px 15px rgba(26, 188, 156, 0.3);
-}
-
-/* AI Chat Assistant */
-.ai-assistant {
-position: fixed;
-bottom: 30px;
-right: 30px;
-z-index: 1000;
-}
-
-.ai-toggle {
-width: 70px;
-height: 70px;
+.forum-header {
 background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+padding: 25px;
+text-align: center;
+}
+
+.forum-posts {
+padding: 30px;
+}
+
+.post {
+background: white;
+border-radius: 12px;
+padding: 25px;
+margin-bottom: 25px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+border-left: 4px solid var(--community);
+transition: transform 0.3s;
+}
+
+.post:hover {
+transform: translateX(5px);
+}
+
+.post-header {
+display: flex;
+align-items: center;
+margin-bottom: 15px;
+}
+
+.avatar {
+width: 50px;
+height: 50px;
 border-radius: 50%;
+background: var(--community);
+color: white;
 display: flex;
 align-items: center;
 justify-content: center;
-color: white;
-font-size: 28px;
-box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-cursor: pointer;
-transition: all 0.3s;
-}
-
-.ai-toggle:hover {
-transform: scale(1.1) rotate(10deg);
-box-shadow: 0 12px 30px rgba(0,0,0,0.3);
-}
-
-.ai-chat-box {
-width: 350px;
-height: 500px;
-background: white;
-border-radius: 20px;
-box-shadow: 0 15px 40px rgba(0,0,0,0.2);
-display: none;
-flex-direction: column;
-overflow: hidden;
-position: absolute;
-bottom: 85px;
-right: 0;
-}
-
-.ai-header {
-background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-color: white;
-padding: 20px;
-text-align: center;
+font-weight: bold;
 font-size: 20px;
-font-weight: 600;
+margin-right: 15px;
 }
 
-.ai-messages {
-flex: 1;
-padding: 20px;
-overflow-y: auto;
+.post-info h4 {
+font-size: 18px;
+color: var(--dark);
+}
+
+.post-info p {
+color: #777;
+font-size: 14px;
+}
+
+.post-content {
+margin-bottom: 20px;
+font-size: 16px;
+line-height: 1.6;
+}
+
+.post-actions {
 display: flex;
-flex-direction: column;
 gap: 15px;
 }
 
-.message {
-max-width: 80%;
-padding: 15px;
-border-radius: 18px;
-font-size: 15px;
-line-height: 1.5;
-}
-
-.ai-message {
-background: #e9ecef;
-align-self: flex-start;
-border-bottom-left-radius: 5px;
-}
-
-.user-message {
-background: var(--peer);
-color: white;
-align-self: flex-end;
-border-bottom-right-radius: 5px;
-}
-
-.ai-input {
+.action-btn {
 display: flex;
-padding: 15px;
-background: #f8f9fa;
-border-top: 1px solid #eee;
-}
-
-.ai-input input {
-flex: 1;
-padding: 12px 15px;
-border: 1px solid #ddd;
-border-radius: 25px;
-font-size: 15px;
-outline: none;
-}
-
-.ai-input button {
-background: var(--primary);
-color: white;
-border: none;
-border-radius: 50%;
-width: 45px;
-height: 45px;
-margin-left: 10px;
-cursor: pointer;
-font-size: 18px;
-transition: background 0.3s;
-}
-
-.ai-input button:hover {
-background: var(--secondary);
-}
-
-/* Contact Section */
-.contact-section {
-background: white;
-padding: 80px 5%;
-}
-
-.contact-container {
-max-width: 1200px;
-margin: 0 auto;
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-gap: 40px;
-}
-
-.contact-info {
-padding: 30px;
-background: #f9f9f9;
-border-radius: 15px;
-box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-.contact-info h3 {
-margin-bottom: 25px;
-color: var(--primary);
-font-size: 26px;
-position: relative;
-padding-bottom: 15px;
-}
-
-.contact-info h3::after {
-content: "";
-position: absolute;
-bottom: 0;
-left: 0;
-width: 60px;
-height: 4px;
-background: var(--accent);
-}
-
-.contact-item {
-display: flex;
-align-items: flex-start;
-margin-bottom: 25px;
-}
-
-.contact-item i {
-font-size: 24px;
-color: var(--primary);
-margin-right: 15px;
-min-width: 30px;
-}
-
-.contact-text h4 {
-margin-bottom: 5px;
-color: #444;
-}
-
-.contact-text p, .contact-text a {
-color: #666;
+align-items: center;
+color: #777;
 text-decoration: none;
-font-size: 17px;
+font-size: 14px;
 transition: color 0.3s;
 }
 
-.contact-text a:hover {
-color: var(--primary);
-text-decoration: underline;
+.action-btn i {
+margin-right: 5px;
 }
 
-/* Footer */
+.action-btn:hover {
+color: var(--community);
+}
+
+.new-post-form {
+padding: 30px;
+background: white;
+border-top: 1px solid #eee;
+}
+
+.new-post-form h3 {
+margin-bottom: 20px;
+color: var(--primary);
+}
+
+.form-group {
+margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+width: 100%;
+padding: 15px;
+border: 1px solid #ddd;
+border-radius: 8px;
+font-size: 16px;
+}
+
+.form-group textarea {
+height: 150px;
+resize: vertical;
+}
+
+.contact-section {
+padding: 80px 5%;
+background: white;
+text-align: center;
+}
+
+.contact-info {
+max-width: 600px;
+margin: 0 auto;
+padding: 40px;
+background: var(--forum-bg);
+border-radius: 15px;
+box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.contact-icon {
+font-size: 48px;
+color: var(--community);
+margin-bottom: 20px;
+}
+
+.contact-info h2 {
+margin-bottom: 20px;
+color: var(--primary);
+}
+
+.phone-number {
+font-size: 32px;
+font-weight: 700;
+color: var(--community);
+margin: 20px 0;
+display: block;
+}
+
+.contact-text {
+font-size: 18px;
+color: #555;
+margin-bottom: 30px;
+}
+
 footer {
-background-color: var(--dark);
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 color: white;
 padding: 60px 5% 30px;
-position: absolute;
-bottom: 0;
-width: 100%;
+text-align: center;
 }
 
 .footer-content {
@@ -467,7 +445,7 @@ margin-bottom: 40px;
 
 .footer-section h3 {
 margin-bottom: 20px;
-color: var(--accent);
+color: white;
 font-size: 22px;
 position: relative;
 padding-bottom: 10px;
@@ -477,10 +455,11 @@ padding-bottom: 10px;
 content: "";
 position: absolute;
 bottom: 0;
-left: 0;
+left: 50%;
+transform: translateX(-50%);
 width: 50px;
 height: 3px;
-background-color: var(--accent);
+background-color: var(--community);
 }
 
 .footer-links {
@@ -492,18 +471,10 @@ margin-bottom: 12px;
 }
 
 .footer-links a {
-color: #ddd;
+color: rgba(255,255,255,0.8);
 text-decoration: none;
 transition: color 0.3s;
-display: flex;
-align-items: center;
 font-size: 16px;
-}
-
-.footer-links a i {
-margin-right: 10px;
-width: 20px;
-text-align: center;
 }
 
 .footer-links a:hover {
@@ -513,8 +484,8 @@ color: white;
 .copyright {
 text-align: center;
 padding-top: 30px;
-border-top: 1px solid #444;
-color: #aaa;
+border-top: 1px solid rgba(255,255,255,0.2);
+color: rgba(255,255,255,0.7);
 font-size: 15px;
 max-width: 1200px;
 margin: 0 auto;
@@ -543,9 +514,8 @@ font-size: 32px;
 font-size: 18px;
 }
 
-.ai-chat-box {
-width: 300px;
-height: 450px;
+.phone-number {
+font-size: 24px;
 }
 }
 </style>
@@ -561,13 +531,13 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <!-- Header -->
 <header>
 <div class="header-container">
-<div class="logo"><i class="fas fa-brain"></i>MindWell</div>
+<div class="logo"><i class="fas fa-hands-helping"></i>MindConnect</div>
 <nav>
 <ul>
 <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-<li><a href="#services"><i class="fas fa-hands-helping"></i> Services</a></li>
-<li><a href="#resources"><i class="fas fa-book"></i> Resources</a></li>
-<li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+<li><a href="#services"><i class="fas fa-comments"></i> Services</a></li>
+<li><a href="#community"><i class="fas fa-users"></i> Community</a></li>
+<li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li>
 </ul>
 </nav>
 </div>
@@ -576,9 +546,9 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <!-- Hero Section -->
 <section id="home" class="hero">
 <div class="hero-content">
-<h1>Your Mental Wellness Journey Starts Here</h1>
-<p>Professional support, compassionate community, and evidence-based resources for your mental health journey. Accessible to everyone, anytime.</p>
-<a href="#services" class="btn">Explore Our Services</a>
+<h1>Find Support in Our Caring Community</h1>
+<p>Share your experiences, connect with others, and find understanding in a safe, supportive environment.</p>
+<a href="#community" class="btn">Join Our Community</a>
 </div>
 </section>
 
@@ -590,9 +560,9 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <div class="service-card therapy">
 <div class="service-content">
 <div class="service-icon"><i class="fas fa-user-md"></i></div>
-<h3>Professional Therapy</h3>
-<p>Connect with licensed therapists via secure video sessions. Covered by most insurance plans with flexible scheduling.</p>
-<button class="btn btn-therapy">Book a Session</button>
+<h3>Professional Guidance</h3>
+<p>Connect with licensed therapists for personalized support through secure video sessions.</p>
+<button class="btn">Learn More</button>
 </div>
 </div>
 
@@ -601,247 +571,165 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <div class="service-content">
 <div class="service-icon"><i class="fas fa-comments"></i></div>
 <h3>Peer Support Network</h3>
-<p>24/7 chat with trained supporters who understand mental health challenges. Anonymously share and get support.</p>
-<button class="btn btn-peer">Connect Now</button>
+<p>Connect with others who understand your journey in our 24/7 moderated support network.</p>
+<a href="#community" class="btn">Connect Now</a>
 </div>
 </div>
 
-<!-- Resources -->
-<div class="service-card resource">
+<!-- Community Support -->
+<div class="service-card community">
 <div class="service-content">
-<div class="service-icon"><i class="fas fa-book-open"></i></div>
-<h3>Resource Library</h3>
-<p>Evidence-based tools, courses, and articles curated by mental health professionals. Personalized recommendations.</p>
-<a href="#resources" class="btn btn-resource">Explore Resources</a>
+<div class="service-icon"><i class="fas fa-users"></i></div>
+<h3>Community Support</h3>
+<p>Join groups and forums to share experiences and find support from others on similar journeys.</p>
+<a href="#community" class="btn">Join Community</a>
 </div>
+</div>
+</div>
+</section>
+
+<!-- Community Section -->
+<section id="community" class="community-section">
+<h2 class="section-title">Community Support Forum</h2>
+<div class="forum-container">
+<div class="forum-header">
+<h2><i class="fas fa-comments"></i> Share Your Story & Find Support</h2>
+<p>Join our compassionate community of individuals supporting each other</p>
+</div>
+
+<div class="forum-posts">
+<div class="post">
+<div class="post-header">
+<div class="avatar">A</div>
+<div class="post-info">
+<h4>Alex Morgan</h4>
+<p>Posted 3 hours ago in Anxiety Support</p>
+</div>
+</div>
+<div class="post-content">
+<p>I've been struggling with anxiety for the past few months. Does anyone have techniques that help when you feel a panic attack coming on? I'd really appreciate any advice or personal experiences.</p>
+</div>
+<div class="post-actions">
+<a href="#" class="action-btn"><i class="fas fa-heart"></i> 24</a>
+<a href="#" class="action-btn"><i class="fas fa-comment"></i> 8</a>
+<a href="#" class="action-btn"><i class="fas fa-share"></i> Share</a>
+</div>
+</div>
+
+<div class="post">
+<div class="post-header">
+<div class="avatar">J</div>
+<div class="post-info">
+<h4>Jamie Smith</h4>
+<p>Posted 1 day ago in Depression Support</p>
+</div>
+</div>
+<div class="post-content">
+<p>Today was really tough. Woke up with no energy or motivation. Just wanted to reach out to others who understand. How do you cope on days when everything feels overwhelming?</p>
+</div>
+<div class="post-actions">
+<a href="#" class="action-btn"><i class="fas fa-heart"></i> 42</a>
+<a href="#" class="action-btn"><i class="fas fa-comment"></i> 15</a>
+<a href="#" class="action-btn"><i class="fas fa-share"></i> Share</a>
+</div>
+</div>
+
+<div class="post">
+<div class="post-header">
+<div class="avatar">M</div>
+<div class="post-info">
+<h4>Maria Chen</h4>
+<p>Posted 2 days ago in Coping Strategies</p>
+</div>
+</div>
+<div class="post-content">
+<p>I've found mindfulness meditation really helpful for my stress levels. If anyone is interested, I'd be happy to share the 5-minute breathing exercise that works for me. It's made a big difference in my daily life.</p>
+</div>
+<div class="post-actions">
+<a href="#" class="action-btn"><i class="fas fa-heart"></i> 56</a>
+<a href="#" class="action-btn"><i class="fas fa-comment"></i> 22</a>
+<a href="#" class="action-btn"><i class="fas fa-share"></i> Share</a>
+</div>
+</div>
+</div>
+
+<div class="new-post-form">
+<h3><i class="fas fa-pen"></i> Share Your Experience</h3>
+<form>
+<div class="form-group">
+<input type="text" placeholder="Title of your post" required>
+</div>
+<div class="form-group">
+<textarea placeholder="Share your thoughts, experiences, or ask for support..." required></textarea>
+</div>
+<button type="submit" class="btn">Post to Community</button>
+</form>
 </div>
 </div>
 </section>
 
 <!-- Contact Section -->
 <section id="contact" class="contact-section">
-<h2 class="section-title">Contact Us</h2>
-<div class="contact-container">
+<h2 class="section-title">Get In Touch</h2>
 <div class="contact-info">
-<h3>Get In Touch</h3>
-
-<div class="contact-item">
-<i class="fas fa-envelope"></i>
-<div class="contact-text">
-<h4>Email Support</h4>
-<a href="mailto:224173@ais.edu.hk">224173@ais.edu.hk</a>
-<p>Response within 24 hours</p>
-</div>
-</div>
-
-<div class="contact-item">
+<div class="contact-icon">
 <i class="fas fa-phone-alt"></i>
-<div class="contact-text">
-<h4>Phone Support</h4>
-<a href="tel:+85212345678">+852 1234 5678</a>
-<p>Monday-Friday, 9am-6pm</p>
 </div>
-</div>
-
-<div class="contact-item">
-<i class="fas fa-map-marker-alt"></i>
-<div class="contact-text">
-<h4>Our Location</h4>
-<p>123 Wellness Avenue<br>Mental Health District<br>Hong Kong</p>
-</div>
-</div>
-</div>
-
-<div class="contact-info">
-<h3>Send Us a Message</h3>
-<form style="margin-top: 20px;">
-<div style="margin-bottom: 20px;">
-<input type="text" placeholder="Your Name" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
-</div>
-
-<div style="margin-bottom: 20px;">
-<input type="email" placeholder="Your Email" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px;">
-</div>
-
-<div style="margin-bottom: 20px;">
-<textarea placeholder="Your Message" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; height: 150px;"></textarea>
-</div>
-
-<button class="btn" style="width: 100%;">Send Message</button>
-</form>
-</div>
+<h2>We're Here to Help</h2>
+<p class="contact-text">Reach out to us anytime for support, questions, or guidance on your mental health journey.</p>
+<a href="tel:59582902" class="phone-number">
+<i class="fas fa-phone"></i> 5958 2902
+</a>
+<p>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm</p>
 </div>
 </section>
-
-<!-- AI Chat Assistant -->
-<div class="ai-assistant">
-<div class="ai-toggle" id="aiToggle">
-<i class="fas fa-robot"></i>
-</div>
-
-<div class="ai-chat-box" id="aiChatBox">
-<div class="ai-header">
-MindWell Assistant
-</div>
-<div class="ai-messages" id="aiMessages">
-<div class="message ai-message">
-Hello! I'm your MindWell assistant. How can I help you today? 😊
-</div>
-<div class="message ai-message">
-You can ask me about mental health resources, coping strategies, or our services.
-</div>
-</div>
-<div class="ai-input">
-<input type="text" id="userInput" placeholder="Type your message...">
-<button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
-</div>
-</div>
-</div>
 
 <!-- Footer -->
 <footer>
 <div class="footer-content">
 <div class="footer-section">
-<h3>MindWell</h3>
-<p>Providing compassionate mental health support since 2023. We're here for you every step of the way.</p>
-<p style="margin-top: 15px;"><i class="fas fa-envelope"></i> 224173@ais.edu.hk</p>
+<h3>MindConnect</h3>
+<p>Providing compassionate mental health support through community connection since 2023.</p>
 </div>
 
 <div class="footer-section">
 <h3>Quick Links</h3>
 <ul class="footer-links">
-<li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
-<li><a href="#services"><i class="fas fa-chevron-right"></i> Services</a></li>
-<li><a href="#resources"><i class="fas fa-chevron-right"></i> Resources</a></li>
-<li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+<li><a href="#home">Home</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#community">Community</a></li>
+<li><a href="#contact">Contact</a></li>
 </ul>
 </div>
 
 <div class="footer-section">
-<h3>Crisis Resources</h3>
+<h3>Support Resources</h3>
 <ul class="footer-links">
-<li><a href="tel:988"><i class="fas fa-phone-alt"></i> 988 Lifeline</a></li>
-<li><a href="#"><i class="fas fa-comment-alt"></i> Crisis Text Line</a></li>
-<li><a href="#"><i class="fas fa-globe"></i> International Helplines</a></li>
+<li><a href="#">Community Guidelines</a></li>
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Safety Information</a></li>
+<li><a href="#">Crisis Resources</a></li>
 </ul>
 </div>
 
 <div class="footer-section">
-<h3>Connect With Us</h3>
+<h3>Contact Us</h3>
 <ul class="footer-links">
-<li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-<li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-<li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-<li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+<li><a href="tel:59582902"><i class="fas fa-phone"></i> 5958 2902</a></li>
+<li><a href="#"><i class="fas fa-envelope"></i> support@mindconnect.com</a></li>
+<li><a href="#"><i class="fas fa-map-marker-alt"></i> Mental Wellness Center</a></li>
 </ul>
 </div>
 </div>
 
 <div class="copyright">
-<p>&copy; 2023 MindWell Mental Health Support. Contact us at 224173@ais.edu.hk. This is not a replacement for emergency care.</p>
+<p>&copy; 2023 MindConnect Mental Health Support Community. We're here for you.</p>
+<p>If you're in crisis, please call emergency services immediately.</p>
 </div>
 </footer>
 
 <script>
-// AI Chat Assistant Functionality
-const aiToggle = document.getElementById('aiToggle');
-const aiChatBox = document.getElementById('aiChatBox');
-const aiMessages = document.getElementById('aiMessages');
-const userInput = document.getElementById('userInput');
-const sendBtn = document.getElementById('sendMessage');
-
-// Toggle chat box visibility
-aiToggle.addEventListener('click', () => {
-aiChatBox.style.display = aiChatBox.style.display === 'flex' ? 'none' : 'flex';
-});
-
-// Send message functionality
-sendBtn.addEventListener('click', sendMessage);
-userInput.addEventListener('keypress', (e) => {
-if (e.key === 'Enter') sendMessage();
-});
-
-function sendMessage() {
-const message = userInput.value.trim();
-if (message) {
-// Add user message to chat
-addMessage(message, 'user');
-userInput.value = '';
-
-// Process message and generate AI response
-setTimeout(() => {
-const response = generateAIResponse(message);
-addMessage(response, 'ai');
-}, 800);
-}
-}
-
-function addMessage(text, sender) {
-const messageDiv = document.createElement('div');
-messageDiv.classList.add('message');
-messageDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
-messageDiv.textContent = text;
-aiMessages.appendChild(messageDiv);
-
-// Scroll to bottom
-aiMessages.scrollTop = aiMessages.scrollHeight;
-}
-
-function generateAIResponse(message) {
-const lowerMsg = message.toLowerCase();
-
-// Greetings
-if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
-return "Hello! How can I assist you with your mental wellness today? 😊";
-}
-
-// Services
-if (lowerMsg.includes('service') || lowerMsg.includes('help') || lowerMsg.includes('support')) {
-return "We offer professional therapy, peer support, and a resource library. You can access these services through our website or contact us at 224173@ais.edu.hk for assistance.";
-}
-
-// Contact
-if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('reach')) {
-return "You can reach us via email at 224173@ais.edu.hk or call +852 1234 5678 during business hours. Our team typically responds within 24 hours.";
-}
-
-// Anxiety
-if (lowerMsg.includes('anxious') || lowerMsg.includes('anxiety') || lowerMsg.includes('nervous')) {
-return "Anxiety can be challenging. Try deep breathing exercises: inhale for 4 seconds, hold for 4, exhale for 6. We also have anxiety resources in our library. Would you like me to direct you there?";
-}
-
-// Depression
-if (lowerMsg.includes('depress') || lowerMsg.includes('sad') || lowerMsg.includes('down')) {
-return "I'm sorry you're feeling this way. Remember that depression is treatable. Our therapists specialize in depression treatment. Would you like information about booking a session?";
-}
-
-// Resources
-if (lowerMsg.includes('resource') || lowerMsg.includes('material') || lowerMsg.includes('article')) {
-return "We have a comprehensive resource library with articles, videos, and tools on various mental health topics. You can access it through the 'Resources' section on our website.";
-}
-
-// Appointments
-if (lowerMsg.includes('appointment') || lowerMsg.includes('book') || lowerMsg.includes('schedule')) {
-return "You can book a therapy session through our website's 'Professional Therapy' section or by emailing 224173@ais.edu.hk with your availability and preferences.";
-}
-
-// Crisis
-if (lowerMsg.includes('emergency') || lowerMsg.includes('crisis') || lowerMsg.includes('urgent')) {
-return "If you're in crisis, please call 988 or your local emergency number immediately. For non-urgent support, our team at 224173@ais.edu.hk can assist during business hours.";
-}
-
-// Default response
-const responses = [
-"I'm here to help with your mental wellness journey. Can you tell me more about what you're looking for?",
-"I understand. Would you like information about our services or resources?",
-"Mental health is important. We have various support options available. How can I assist you?",
-"I recommend exploring our resource library or contacting our support team at 224173@ais.edu.hk for personalized assistance.",
-"Thank you for reaching out. Our team is available to help at 224173@ais.edu.hk if you need human support."
-];
-return responses[Math.floor(Math.random() * responses.length)];
-}
-
-// Smooth scrolling
+// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 anchor.addEventListener('click', function(e) {
 e.preventDefault();
@@ -853,6 +741,50 @@ behavior: 'smooth'
 });
 }
 });
+});
+
+// Form submission handling
+const forms = document.querySelectorAll('form');
+forms.forEach(form => {
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+
+if (this.id === 'communityForm') {
+alert('Thank you for sharing with our community! Your post will be visible after moderation.');
+} else {
+alert('Thank you for your message! We will respond as soon as possible.');
+}
+
+this.reset();
+});
+});
+
+// Animation on scroll
+const observerOptions = {
+root: null,
+rootMargin: '0px',
+threshold: 0.1
+};
+
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('animated');
+}
+});
+}, observerOptions);
+
+document.querySelectorAll('.service-card, .post, .contact-info').forEach(el => {
+el.style.opacity = '0';
+el.style.transform = 'translateY(20px)';
+el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+observer.observe(el);
+
+el.classList.add('animated');
+setTimeout(() => {
+el.style.opacity = '1';
+el.style.transform = 'translateY(0)';
+}, 300);
 });
 </script>
 </body>
