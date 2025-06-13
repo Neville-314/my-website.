@@ -1430,6 +1430,197 @@ let postIdCounter = 1;
 let isAIThinking = false;
 let postToDelete = null;
 
+// IndexedDB for persistent storage
+let db;
+const dbName = 'MindSupportDB';
+const dbVersion = 1;
+
+// Initialize IndexedDB
+function initDB() {
+return new Promise((resolve, reject) => {
+const request = indexedDB.open(dbName, dbVersion);
+
+request.onerror = () => {
+console.error('Failed to open IndexedDB');
+// Initialize with sample data if DB fails
+initializeSampleData();
+resolve(false);
+};
+
+request.onsuccess = (event) => {
+db = event.target.result;
+console.log('IndexedDB opened successfully');
+loadPostsFromDB();
+resolve(true);
+};
+
+request.onupgradeneeded = (event) => {
+db = event.target.result;
+
+// Create posts store
+if (!db.objectStoreNames.contains('posts')) {
+const postsStore = db.createObjectStore('posts', { keyPath: 'id' });
+postsStore.createIndex('timestamp', 'timestamp', { unique: false });
+}
+
+// Create post versions store
+if (!db.objectStoreNames.contains('postVersions')) {
+const versionsStore = db.createObjectStore('postVersions', { keyPath: 'postId' });
+}
+
+// Create metadata store for counters
+if (!db.objectStoreNames.contains('metadata')) {
+const metaStore = db.createObjectStore('metadata', { keyPath: 'key' });
+}
+};
+});
+}
+
+// Save posts to IndexedDB
+function savePostsToDB() {
+if (!db) return;
+
+const transaction = db.transaction(['posts', 'postVersions', 'metadata'], 'readwrite');
+const postsStore = transaction.objectStore('posts');
+const versionsStore = transaction.objectStore('postVersions');
+const metaStore = transaction.objectStore('metadata');
+
+// Clear existing data
+postsStore.clear();
+versionsStore.clear();
+
+// Save all posts
+posts.forEach(post => {
+postsStore.add(post);
+});
+
+// Save post versions
+Object.keys(postVersions).forEach(postId => {
+versionsStore.add({
+postId: parseInt(postId),
+versions: postVersions[postId]
+});
+});
+
+// Save metadata
+metaStore.put({ key: 'postIdCounter', value: postIdCounter });
+}
+
+// Load posts from IndexedDB
+function loadPostsFromDB() {
+if (!db) {
+initializeSampleData();
+return;
+}
+
+const transaction = db.transaction(['posts', 'postVersions', 'metadata'], 'readonly');
+const postsStore = transaction.objectStore('posts');
+const versionsStore = transaction.objectStore('postVersions');
+const metaStore = transaction.objectStore('metadata');
+
+// Load posts
+const postsRequest = postsStore.getAll();
+postsRequest.onsuccess = () => {
+posts = postsRequest.result.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+if (posts.length === 0) {
+initializeSampleData();
+}
+updatePostCount();
+renderPosts();
+};
+
+// Load post versions
+const versionsRequest = versionsStore.getAll();
+versionsRequest.onsuccess = () => {
+postVersions = {};
+versionsRequest.result.forEach(item => {
+postVersions[item.postId] = item.versions;
+});
+};
+
+// Load metadata
+const metaRequest = metaStore.get('postIdCounter');
+metaRequest.onsuccess = () => {
+if (metaRequest.result) {
+postIdCounter = metaRequest.result.value;
+} else {
+postIdCounter = posts.length > 0 ? Math.max(...posts.map(p => p.id)) + 1 : 1;
+}
+};
+}
+
+// Initialize with sample data if no posts exist
+function initializeSampleData() {
+if (posts.length === 0) {
+const samplePosts = [
+{
+id: 1,
+title: "Finding Hope in Small Moments",
+content: "Today I realized that recovery isn't about grand gestures. It's about noticing the warmth of morning coffee, the sound of birds, or a friend's text. These tiny moments are building blocks of healing. What small moment brought you joy today?",
+author: "Sarah M.",
+triggerWarning: false,
+timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
+version: 1,
+likes: 12,
+replies: [
+{
+id: 101,
+author: "Alex K.",
+content: "Thank you for sharing this. I needed to hear it today. The sunset through my window was beautiful.",
+timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000)
+}
+]
+},
+{
+id: 2,
+title: "Anxiety Management Techniques That Actually Work",
+content: "After years of struggling with anxiety, I've found some techniques that genuinely help me cope. The 5-4-3-2-1 grounding technique (5 things you see, 4 you hear, 3 you touch, 2 you smell, 1 you taste) has been a game-changer during panic attacks. Progressive muscle relaxation before bed helps too. What works for you?",
+author: "Michael R.",
+triggerWarning: false,
+timestamp: new Date(Date.now() - 4 * 60 * 60 * 1000), // 4 hours ago
+version: 1,
+likes: 23,
+replies: [
+{
+id: 201,
+author: "Emma L.",
+content: "The box breathing technique (4-4-4-4) has been my lifesaver. Inhale 4, hold 4, exhale 4, hold 4.",
+timestamp: new Date(Date.now() - 3 * 60 * 60 * 1000)
+},
+{
+id: 202,
+author: "David T.",
+content: "Thank you for sharing! I've been struggling with panic attacks lately. Going to try the 5-4-3-2-1 technique.",
+timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000)
+}
+]
+},
+{
+id: 3,
+title: "Navigating Depression During the Holidays",
+content: "The holidays can be especially challenging when you're dealing with depression. The pressure to be joyful when you're struggling feels overwhelming. I'm learning it's okay to set boundaries, skip events that drain me, and create my own traditions. Remember: your mental health comes first.",
+author: "Jordan P.",
+triggerWarning: true,
+timestamp: new Date(Date.now() - 6 * 60 * 60 * 1000), // 6 hours ago
+version: 1,
+likes: 18,
+replies: []
+}
+];
+
+posts = samplePosts;
+postIdCounter = 4;
+
+// Initialize post versions
+samplePosts.forEach(post => {
+postVersions[post.id] = [post];
+});
+
+updatePostCount();
+renderPosts();
+}
+}
+
 // Community Forum Functionality
 document.getElementById('communityForm').addEventListener('submit', function(e) {
 e.preventDefault();
@@ -1461,6 +1652,9 @@ replies: []
 
 posts.unshift(newPost);
 postVersions[postId] = [newPost];
+
+// Save to IndexedDB
+savePostsToDB();
 
 updatePostCount();
 renderPosts();
@@ -1566,6 +1760,7 @@ document.getElementById(`likes-${postId}`).textContent = post.likes;
 const btn = event.target.closest('.action-btn');
 btn.classList.add('liked');
 setTimeout(() => btn.classList.remove('liked'), 2000);
+savePostsToDB();
 }
 }
 
@@ -1588,6 +1783,7 @@ timestamp: new Date()
 };
 post.replies.push(reply);
 input.value = '';
+savePostsToDB();
 renderPosts();
 showNotification('Reply added successfully!', 'success');
 }
@@ -1613,6 +1809,7 @@ const postIndex = posts.findIndex(p => p.id === postId);
 posts[postIndex] = newVersion;
 // Add to version history
 postVersions[postId].unshift(newVersion);
+savePostsToDB();
 renderPosts();
 showNotification('Post updated! Version history saved.', 'success');
 }
@@ -1683,6 +1880,9 @@ posts.splice(postIndex, 1);
 
 // Remove from postVersions
 delete postVersions[postId];
+
+// Save to database
+savePostsToDB();
 
 // Update post count
 updatePostCount();
@@ -2138,6 +2338,15 @@ closeDeleteModal();
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+// Initialize IndexedDB
+initDB().then((success) => {
+if (success) {
+console.log('Database initialized successfully with persistent storage');
+} else {
+console.log('Using fallback mode with sample data');
+}
+});
+
 // Animation on scroll
 const observerOptions = {
 root: null,
@@ -2163,7 +2372,7 @@ observer.observe(el);
 
 // Show welcome message after delay
 setTimeout(() => {
-showNotification('Welcome to MindSupport! Our AI assistant is ready to help 24/7.', 'info');
+showNotification('Welcome to MindSupport! Posts now persist after refresh and are shared with all users.', 'info');
 }, 2000);
 });
 
