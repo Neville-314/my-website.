@@ -25,6 +25,7 @@
             --peer: #3498db;
             --community: #1abc9c;
             --ai-bg: #e3f2fd;
+            --forum-bg: #f8f9ff;
         }
         
         body {
@@ -172,8 +173,20 @@
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(26, 188, 156, 0.4);
         }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
         
-        .ai-section {
+        .btn-outline:hover {
+            background: linear-gradient(135deg, var(--community) 0%, var(--primary) 100%);
+            color: white;
+        }
+        
+        .ai-section, .forum-section {
             padding: 80px 5%;
             background: white;
             max-width: 1200px;
@@ -198,6 +211,15 @@
             background: var(--community);
             margin: 15px auto;
             border-radius: 3px;
+        }
+        
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 18px;
+            color: #555;
+            line-height: 1.7;
         }
         
         .ai-container {
@@ -391,6 +413,172 @@
             line-height: 1.6;
         }
         
+        /* Forum Styles */
+        .forum-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .new-post {
+            background: var(--forum-bg);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .new-post h3 {
+            margin-bottom: 20px;
+            color: var(--primary);
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--community);
+            box-shadow: 0 0 0 3px rgba(26, 188, 156, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .posts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .post-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            transition: transform 0.3s;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .post-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .post-author .avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--community);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .post-time {
+            font-size: 14px;
+            color: #777;
+        }
+        
+        .post-content {
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+        
+        .post-tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .post-tag {
+            background: var(--ai-bg);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            color: var(--primary);
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .action-btn:hover {
+            color: var(--community);
+        }
+        
+        .empty-posts {
+            text-align: center;
+            padding: 50px 20px;
+            background: var(--forum-bg);
+            border-radius: 15px;
+            color: #777;
+        }
+        
+        .empty-posts i {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--community);
+        }
+        
         .contact-section {
             padding: 80px 5%;
             background: var(--ai-bg);
@@ -533,6 +721,12 @@
             .ai-messages {
                 height: 300px;
             }
+            
+            .post-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
         }
     </style>
 </head>
@@ -551,6 +745,7 @@
             <nav>
                 <ul>
                     <li><a href="#ai-assistant"><i class="fas fa-robot"></i> AI Assistant</a></li>
+                    <li><a href="#forum"><i class="fas fa-comments"></i> Community</a></li>
                     <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
                     <li><a href="#contact"><i class="fas fa-phone"></i> Contact</a></li>
                 </ul>
@@ -592,289 +787,3 @@
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
-            </div>
-            
-            <div class="ai-input">
-                <input type="text" id="userInput" placeholder="Type your message here...">
-                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-        
-        <div class="ai-features" id="features">
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h3>Instant Response</h3>
-                <p>Get immediate support without waiting. Our AI responds in real-time with thoughtful, helpful suggestions.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <h3>Confidential</h3>
-                <p>All conversations are private and anonymous. Your information is never stored or shared.</p>
-            </div>
-            
-            <div class="feature-card">
-                <div class="feature-icon">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <h3>Compassionate</h3>
-                <p>Designed with empathy and understanding to provide caring, non-judgmental support.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-info">
-            <div class="contact-icon">
-                <i class="fas fa-phone-alt"></i>
-            </div>
-            <h2>We're Here to Help</h2>
-            <p class="contact-text">Reach out to us anytime for support, questions, or guidance on your mental health journey.</p>
-            
-            <a href="tel:59582902" class="phone-number">
-                <i class="fas fa-phone"></i> 5958 2902
-            </a>
-            
-            <a href="mailto:224173@ais.edu.hk" class="email-contact">
-                <i class="fas fa-envelope"></i> 224173@ais.edu.hk
-            </a>
-            
-            <p>Monday - Friday: 9am - 6pm<br>Saturday: 10am - 4pm</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>MindSupport</h3>
-                <p>Providing compassionate mental health support through AI technology.</p>
-                <p style="margin-top: 15px;">
-                    <i class="fas fa-envelope"></i> 224173@ais.edu.hk<br>
-                    <i class="fas fa-phone"></i> 5958 2902
-                </p>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="#ai-assistant">AI Assistant</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Resources</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Crisis Resources</a></li>
-                    <li><a href="#">Mental Health Tips</a></li>
-                    <li><a href="#">Therapist Directory</a></li>
-                    <li><a href="#">Self-Care Tools</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
-                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
-                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            <p>&copy; 2023 MindSupport Mental Health Community. All rights reserved.</p>
-            <p>If you're in crisis, please call emergency services immediately.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Enhanced AI Assistant Functionality
-        const aiMessages = document.getElementById('aiMessages');
-        const userInput = document.getElementById('userInput');
-        const sendBtn = document.getElementById('sendMessage');
-        const typingIndicator = document.getElementById('typingIndicator');
-        
-        // Conversation context
-        let conversationContext = {
-            name: '',
-            mood: '',
-            issue: ''
-        };
-        
-        // Send message functionality
-        sendBtn.addEventListener('click', sendMessage);
-        userInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-        
-        function sendMessage() {
-            const message = userInput.value.trim();
-            if (message) {
-                // Add user message to chat
-                addMessage(message, 'user');
-                userInput.value = '';
-                
-                // Show typing indicator
-                typingIndicator.style.display = 'block';
-                
-                // Process message and generate AI response after a short delay
-                setTimeout(() => {
-                    typingIndicator.style.display = 'none';
-                    const response = generateAIResponse(message);
-                    addMessage(response, 'ai');
-                    
-                    // Scroll to bottom
-                    aiMessages.scrollTop = aiMessages.scrollHeight;
-                }, 1000 + Math.random() * 1000); // Simulate thinking time
-            }
-        }
-        
-        function addMessage(text, sender) {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message');
-            messageDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
-            messageDiv.textContent = text;
-            aiMessages.appendChild(messageDiv);
-            
-            // Scroll to bottom
-            aiMessages.scrollTop = aiMessages.scrollHeight;
-        }
-        
-        function generateAIResponse(message) {
-            const lowerMsg = message.toLowerCase();
-            
-            // Update context based on user message
-            updateContext(message);
-            
-            // Greetings
-            if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
-                return "Hello! How are you feeling today? I'm here to listen and support you.";
-            }
-            
-            // Name
-            if (lowerMsg.includes('name is') || lowerMsg.includes("i'm")) {
-                const nameMatch = message.match(/(?:name is|i'm|i am) (\w+)/i);
-                if (nameMatch && nameMatch[1]) {
-                    conversationContext.name = nameMatch[1];
-                    return `Nice to meet you, ${conversationContext.name}! How can I support you today?`;
-                }
-            }
-            
-            // Mood/feeling
-            if (lowerMsg.includes('feel') || lowerMsg.includes('feeling')) {
-                if (lowerMsg.includes('anxious') || lowerMsg.includes('anxiety')) {
-                    conversationContext.mood = 'anxious';
-                    return "I understand anxiety can be overwhelming. Let's talk about what's causing these feelings. Would you like to try a breathing exercise?";
-                }
-                if (lowerMsg.includes('depress') || lowerMsg.includes('sad') || lowerMsg.includes('down')) {
-                    conversationContext.mood = 'depressed';
-                    return "I'm sorry you're feeling this way. Remember that depression is treatable and you're not alone. Would you like to talk about what's been on your mind?";
-                }
-                if (lowerMsg.includes('stress') || lowerMsg.includes('stressed')) {
-                    conversationContext.mood = 'stressed';
-                    return "Stress can really take a toll. Let's explore what's causing your stress and some coping strategies. What's been stressing you lately?";
-                }
-                if (lowerMsg.includes('overwhelm') || lowerMsg.includes('overwhelmed')) {
-                    conversationContext.mood = 'overwhelmed';
-                    return "Feeling overwhelmed is completely understandable. Let's break things down into manageable steps. What's feeling most overwhelming right now?";
-                }
-                return "Thanks for sharing how you're feeling. Would you like to talk more about what's causing these emotions?";
-            }
-            
-            // Coping strategies
-            if (lowerMsg.includes('cope') || lowerMsg.includes('help')) {
-                if (conversationContext.mood === 'anxious') {
-                    return "For anxiety, try this technique: Find a comfortable position. Breathe in slowly for 4 seconds, hold for 4 seconds, then exhale slowly for 6 seconds. Repeat 5 times. How does that feel?";
-                }
-                if (conversationContext.mood === 'depressed') {
-                    return "When feeling depressed, small activities can help. Try: Taking a short walk outside, writing down 3 things you're grateful for, or listening to uplifting music. What small step could you take today?";
-                }
-                return "Here's a helpful strategy: Practice mindfulness by focusing on your senses. Notice 5 things you see, 4 things you feel, 3 things you hear, 2 things you smell, and 1 thing you taste. How does that make you feel?";
-            }
-            
-            // Sleep issues
-            if (lowerMsg.includes('sleep') || lowerMsg.includes('insomnia')) {
-                return "Sleep issues are common with stress. Try establishing a bedtime routine: Turn off screens an hour before bed, keep your bedroom cool and dark, and try relaxation techniques. How has your sleep been lately?";
-            }
-            
-            // Relationships
-            if (lowerMsg.includes('relationship') || lowerMsg.includes('friend') || lowerMsg.includes('family')) {
-                return "Relationships can be challenging. Remember that healthy communication involves 'I' statements (I feel... when...). Would you like to talk more about your relationship concerns?";
-            }
-            
-            // Crisis
-            if (lowerMsg.includes('emergency') || lowerMsg.includes('crisis') || 
-                lowerMsg.includes('urgent') || lowerMsg.includes('suicid') || 
-                lowerMsg.includes('hurt myself')) {
-                return "I'm concerned about your safety. Please call 988 or your local emergency number immediately. You can also text HOME to 741741 for crisis support. Your life matters, and help is available.";
-            }
-            
-            // Default response
-            const responses = [
-                "I appreciate you sharing that. How has this been affecting your daily life?",
-                "Thank you for opening up. Would you like to explore this topic further?",
-                "I understand. Let's work together to find some strategies that might help. What thoughts come to mind?",
-                "That sounds challenging. What support do you feel you need right now?",
-                "I'm here for you. Could you tell me more about what you're experiencing?"
-            ];
-            return responses[Math.floor(Math.random() * responses.length)];
-        }
-        
-        function updateContext(message) {
-            // Extract name if mentioned
-            const nameMatch = message.match(/(?:name is|i'm|i am) (\w+)/i);
-            if (nameMatch && nameMatch[1]) {
-                conversationContext.name = nameMatch[1];
-            }
-            
-            // Detect mood if mentioned
-            if (message.match(/\b(anxious|anxiety|nervous|worried)\b/i)) {
-                conversationContext.mood = 'anxious';
-            } else if (message.match(/\b(depressed|depression|sad|down|hopeless)\b/i)) {
-                conversationContext.mood = 'depressed';
-            } else if (message.match(/\b(stress|stressed|overwhelmed|pressure)\b/i)) {
-                conversationContext.mood = 'stressed';
-            }
-            
-            // Detect main issue
-            if (message.match(/\b(sleep|insomnia|tired|exhausted)\b/i)) {
-                conversationContext.issue = 'sleep';
-            } else if (message.match(/\b(relationship|friend|family|partner)\b/i)) {
-                conversationContext.issue = 'relationships';
-            } else if (message.match(/\b(work|job|school|study)\b/i)) {
-                conversationContext.issue = 'work/school';
-            }
-        }
-        
-        // Smooth scrolling for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Initial greeting
-        setTimeout(() => {
-            addMessage("If you're not sure where to start, you could tell me how you're feeling today or what's been on your mind.", 'ai');
-        }, 3000);
-    </script>
-</body>
-</html>
