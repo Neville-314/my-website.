@@ -983,3 +983,103 @@ observer.observe(el);
 </script>
 </body>
 </html>
+import random
+import time
+
+class MentalHealthAssistant:
+    def __init__(self):
+        self.user_name = ""
+        self.resources = {
+            "anxiety": [
+                "Practice deep breathing: inhale for 4 seconds, hold for 4, exhale for 6",
+                "Try grounding techniques: name 5 things you can see, 4 you can touch, etc.",
+                "Consider limiting caffeine and getting regular exercise"
+            ],
+            "depression": [
+                "Small daily routines can help - try making your bed each morning",
+                "Reach out to someone you trust, even just for a short chat",
+                "Sunlight exposure can help - try sitting near a window"
+            ],
+            "stress": [
+                "Prioritize tasks and tackle them one at a time",
+                "Short breaks every hour can improve focus and reduce stress",
+                "Progressive muscle relaxation can help release tension"
+            ]
+        }
+        
+        self.crisis_resources = [
+            "National Suicide Prevention Lifeline: 988 (US)",
+            "Crisis Text Line: Text HOME to 741741 (US)",
+            "International Association for Suicide Prevention: https://www.iasp.info/resources/Crisis_Centres/"
+        ]
+
+    def greet(self):
+        print("\nHello! I'm here to offer mental health support.")
+        print("I can listen, provide coping strategies, or suggest resources.")
+        print("Remember: I'm not a substitute for professional help.")
+        print("If you're in crisis, please contact a human professional immediately.\n")
+        self.user_name = input("May I know your name? ").strip() or "friend"
+        print(f"\nHi {self.user_name}, how are you feeling today?")
+
+    def respond(self, user_input):
+        user_input = user_input.lower()
+        
+        # Crisis detection
+        if any(word in user_input for word in ["suicide", "kill myself", "end it all", "want to die"]):
+            print("\nI'm really sorry you're feeling this way. Please know you're not alone.")
+            print("Here are some immediate resources that can help:")
+            for resource in self.crisis_resources:
+                print(f"- {resource}")
+            print("\nYour life matters. Please reach out to one of these resources now.")
+            return True
+        
+        # General responses
+        if any(word in user_input for word in ["bad", "terrible", "awful", "horrible"]):
+            responses = [
+                f"I'm really sorry you're feeling that way, {self.user_name}.",
+                "That sounds really difficult. Would you like to talk more about it?",
+                "I hear you. Would coping strategies or resources be helpful?"
+            ]
+            print(random.choice(responses))
+        
+        elif any(word in user_input for word in ["anxious", "anxiety", "nervous", "panic"]):
+            print("\nAnxiety can feel overwhelming. Here are some strategies:")
+            for strategy in self.resources["anxiety"]:
+                print(f"- {strategy}")
+        
+        elif any(word in user_input for word in ["depressed", "sad", "hopeless", "empty"]):
+            print("\nDepression can make everything feel harder. Some suggestions:")
+            for suggestion in self.resources["depression"]:
+                print(f"- {suggestion}")
+        
+        elif any(word in user_input for word in ["stress", "overwhelmed", "pressure"]):
+            print("\nStress management techniques:")
+            for technique in self.resources["stress"]:
+                print(f"- {technique}")
+        
+        elif "thank" in user_input:
+            print(f"You're very welcome, {self.user_name}. I'm glad I could help.")
+        
+        elif any(word in user_input for word in ["exit", "quit", "bye", "goodbye"]):
+            print(f"Take care of yourself, {self.user_name}. Remember help is always available.")
+            return True
+        
+        else:
+            print("I hear you. Can you tell me more about how you're feeling?")
+        
+        return False
+
+    def run(self):
+        self.greet()
+        while True:
+            user_input = input("\n> ").strip()
+            if not user_input:
+                continue
+            if self.respond(user_input):
+                break
+
+if __name__ == "__main__":
+    print("Initializing mental health assistant...")
+    assistant = MentalHealthAssistant()
+    assistant.run()
+
