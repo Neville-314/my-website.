@@ -26,6 +26,7 @@ font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 --community: #1abc9c;
 --forum-bg: #f5f7fa;
 --ai-bg: #e3f2fd;
+--warning: #f39c12;
 }
 
 body {
@@ -176,6 +177,16 @@ transform: translateY(-3px);
 box-shadow: 0 8px 20px rgba(26, 188, 156, 0.4);
 }
 
+.btn-secondary {
+background: linear-gradient(135deg, var(--peer) 0%, var(--secondary) 100%);
+box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+.btn-warning {
+background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
+box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);
+}
+
 .services {
 padding: 80px 5%;
 background-color: white;
@@ -284,24 +295,203 @@ padding: 25px;
 text-align: center;
 }
 
+.community-stats {
+display: flex;
+justify-content: center;
+gap: 30px;
+margin-top: 15px;
+font-size: 14px;
+opacity: 0.9;
+}
+
+.community-stats span {
+display: flex;
+align-items: center;
+gap: 5px;
+}
+
 .forum-posts {
 padding: 30px;
 min-height: 300px;
+max-height: 600px;
+overflow-y: auto;
+}
+
+.empty-community {
 display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-}
-
-.empty-community {
 text-align: center;
 color: #777;
+height: 200px;
 }
 
 .empty-community i {
 font-size: 60px;
 margin-bottom: 20px;
 color: var(--community);
+}
+
+.post-item {
+background: #f8f9fa;
+border-radius: 12px;
+padding: 20px;
+margin-bottom: 20px;
+box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+transition: all 0.3s ease;
+border-left: 4px solid var(--community);
+}
+
+.post-item:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.post-header {
+display: flex;
+justify-content: between;
+align-items: center;
+margin-bottom: 15px;
+flex-wrap: wrap;
+gap: 10px;
+}
+
+.post-author {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.author-avatar {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background: var(--community);
+display: flex;
+align-items: center;
+justify-content: center;
+color: white;
+font-weight: 600;
+}
+
+.post-info {
+flex: 1;
+}
+
+.post-author-name {
+font-weight: 600;
+color: var(--primary);
+}
+
+.post-meta {
+font-size: 13px;
+color: #666;
+}
+
+.version-badge {
+background: var(--warning);
+color: white;
+padding: 3px 8px;
+border-radius: 12px;
+font-size: 11px;
+font-weight: 600;
+}
+
+.warning-badge {
+background: var(--crisis);
+color: white;
+padding: 4px 8px;
+border-radius: 15px;
+font-size: 12px;
+font-weight: 600;
+margin-left: 10px;
+}
+
+.post-title {
+font-size: 18px;
+font-weight: 600;
+color: var(--primary);
+margin-bottom: 10px;
+}
+
+.post-content {
+color: #555;
+line-height: 1.6;
+margin-bottom: 15px;
+}
+
+.post-actions {
+display: flex;
+gap: 15px;
+align-items: center;
+margin-top: 15px;
+padding-top: 15px;
+border-top: 1px solid #e9ecef;
+}
+
+.action-btn {
+background: none;
+border: none;
+color: #666;
+cursor: pointer;
+font-size: 14px;
+display: flex;
+align-items: center;
+gap: 5px;
+padding: 5px 10px;
+border-radius: 20px;
+transition: all 0.3s;
+}
+
+.action-btn:hover {
+background: var(--light);
+color: var(--primary);
+}
+
+.action-btn.liked {
+color: var(--crisis);
+}
+
+.action-btn.liked:hover {
+background: rgba(231, 76, 60, 0.1);
+}
+
+.reply-section {
+margin-top: 15px;
+padding-top: 15px;
+border-top: 1px solid #e9ecef;
+display: none;
+}
+
+.reply-input {
+display: flex;
+gap: 10px;
+margin-bottom: 15px;
+}
+
+.reply-input input {
+flex: 1;
+padding: 10px 15px;
+border: 1px solid #ddd;
+border-radius: 25px;
+font-size: 14px;
+}
+
+.reply-input button {
+padding: 10px 20px;
+}
+
+.replies {
+margin-left: 20px;
+}
+
+.reply-item {
+background: white;
+padding: 15px;
+border-radius: 8px;
+margin-bottom: 10px;
+border-left: 3px solid var(--peer);
 }
 
 .new-post-form {
@@ -331,6 +521,164 @@ font-size: 16px;
 .form-group textarea {
 height: 150px;
 resize: vertical;
+}
+
+.checkbox-label {
+display: flex;
+align-items: center;
+gap: 10px;
+cursor: pointer;
+font-size: 14px;
+color: #666;
+}
+
+.checkbox-label input[type="checkbox"] {
+width: auto;
+margin: 0;
+}
+
+/* Modal Styles */
+.modal {
+display: none;
+position: fixed;
+z-index: 2000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,0.5);
+backdrop-filter: blur(3px);
+}
+
+.modal-content {
+background-color: white;
+margin: 5% auto;
+padding: 0;
+border-radius: 15px;
+width: 90%;
+max-width: 600px;
+max-height: 80vh;
+overflow: hidden;
+box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+color: white;
+padding: 20px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.modal-header h3 {
+margin: 0;
+font-size: 20px;
+}
+
+.close {
+color: white;
+font-size: 28px;
+font-weight: bold;
+cursor: pointer;
+line-height: 1;
+}
+
+.close:hover {
+opacity: 0.7;
+}
+
+.modal-body {
+padding: 20px;
+max-height: 400px;
+overflow-y: auto;
+}
+
+.version-item {
+background: #f8f9fa;
+border-radius: 8px;
+padding: 15px;
+margin-bottom: 15px;
+border-left: 4px solid var(--warning);
+}
+
+.version-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 10px;
+}
+
+.version-number {
+font-weight: 600;
+color: var(--primary);
+}
+
+.version-date {
+font-size: 12px;
+color: #666;
+}
+
+.current-version {
+background: var(--success);
+color: white;
+padding: 2px 8px;
+border-radius: 10px;
+font-size: 11px;
+}
+
+.chat-messages {
+height: 300px;
+overflow-y: auto;
+border: 1px solid #eee;
+border-radius: 8px;
+padding: 15px;
+margin-bottom: 15px;
+background: #f8f9fa;
+}
+
+.chat-message {
+margin-bottom: 15px;
+display: flex;
+gap: 10px;
+}
+
+.chat-message.own {
+justify-content: flex-end;
+}
+
+.chat-message.own .message-bubble {
+background: var(--peer);
+color: white;
+}
+
+.message-bubble {
+background: white;
+padding: 10px 15px;
+border-radius: 18px;
+max-width: 70%;
+box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.chat-input {
+display: flex;
+gap: 10px;
+}
+
+.chat-input input {
+flex: 1;
+padding: 12px 15px;
+border: 1px solid #ddd;
+border-radius: 25px;
+}
+
+.chat-input button {
+padding: 12px 20px;
+border: none;
+background: var(--peer);
+color: white;
+border-radius: 25px;
+cursor: pointer;
 }
 
 .policies-section {
@@ -518,9 +866,21 @@ transform: scale(1.1) rotate(10deg);
 box-shadow: 0 12px 30px rgba(0,0,0,0.3);
 }
 
+.ai-toggle.has-notification::after {
+content: '';
+position: absolute;
+top: 8px;
+right: 8px;
+width: 12px;
+height: 12px;
+background: var(--crisis);
+border-radius: 50%;
+border: 2px solid white;
+}
+
 .ai-chat-box {
-width: 350px;
-height: 500px;
+width: 380px;
+height: 550px;
 background: white;
 border-radius: 20px;
 box-shadow: 0 15px 40px rgba(0,0,0,0.2);
@@ -537,8 +897,14 @@ background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
 color: white;
 padding: 20px;
 text-align: center;
-font-size: 20px;
+font-size: 18px;
 font-weight: 600;
+}
+
+.ai-status {
+font-size: 12px;
+opacity: 0.9;
+margin-top: 5px;
 }
 
 .ai-messages {
@@ -552,18 +918,25 @@ background: var(--ai-bg);
 }
 
 .message {
-max-width: 80%;
-padding: 15px;
+max-width: 85%;
+padding: 12px 16px;
 border-radius: 18px;
-font-size: 15px;
-line-height: 1.5;
+font-size: 14px;
+line-height: 1.4;
+animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
 }
 
 .ai-message {
 background: white;
 align-self: flex-start;
 border-bottom-left-radius: 5px;
-box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+border-left: 3px solid var(--community);
 }
 
 .user-message {
@@ -573,11 +946,46 @@ align-self: flex-end;
 border-bottom-right-radius: 5px;
 }
 
+.typing-indicator {
+background: white;
+align-self: flex-start;
+border-bottom-left-radius: 5px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+border-left: 3px solid var(--warning);
+}
+
+.typing-dots {
+display: flex;
+gap: 4px;
+}
+
+.typing-dots span {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: var(--warning);
+animation: typing 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+animation-delay: 0.4s;
+}
+
+@keyframes typing {
+0%, 60%, 100% { transform: translateY(0); }
+30% { transform: translateY(-10px); }
+}
+
 .ai-input {
 display: flex;
 padding: 15px;
 background: #f8f9fa;
 border-top: 1px solid #eee;
+gap: 10px;
 }
 
 .ai-input input {
@@ -585,7 +993,7 @@ flex: 1;
 padding: 12px 15px;
 border: 1px solid #ddd;
 border-radius: 25px;
-font-size: 15px;
+font-size: 14px;
 outline: none;
 }
 
@@ -596,14 +1004,43 @@ border: none;
 border-radius: 50%;
 width: 45px;
 height: 45px;
-margin-left: 10px;
 cursor: pointer;
-font-size: 18px;
-transition: background 0.3s;
+font-size: 16px;
+transition: all 0.3s;
 }
 
 .ai-input button:hover {
 background: var(--secondary);
+transform: scale(1.05);
+}
+
+.ai-input button:disabled {
+background: #ccc;
+cursor: not-allowed;
+transform: none;
+}
+
+.quick-actions {
+display: flex;
+gap: 8px;
+margin-bottom: 10px;
+flex-wrap: wrap;
+}
+
+.quick-action {
+background: rgba(74, 111, 165, 0.1);
+color: var(--primary);
+padding: 6px 12px;
+border-radius: 15px;
+font-size: 12px;
+cursor: pointer;
+transition: all 0.3s;
+border: 1px solid rgba(74, 111, 165, 0.2);
+}
+
+.quick-action:hover {
+background: var(--primary);
+color: white;
 }
 
 @media (max-width: 768px) {
@@ -634,8 +1071,37 @@ font-size: 24px;
 }
 
 .ai-chat-box {
+width: 320px;
+height: 500px;
+right: -10px;
+}
+
+.community-stats {
+flex-direction: column;
+gap: 10px;
+}
+
+.post-actions {
+flex-wrap: wrap;
+}
+
+.modal-content {
+width: 95%;
+margin: 10% auto;
+}
+}
+
+@media (max-width: 480px) {
+.ai-chat-box {
 width: 300px;
 height: 450px;
+bottom: 85px;
+right: -20px;
+}
+
+.post-header {
+flex-direction: column;
+align-items: flex-start;
 }
 }
 </style>
@@ -667,7 +1133,7 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <section id="home" class="hero">
 <div class="hero-content">
 <h1>Find Support in Our Caring Community</h1>
-<p>Share your experiences, connect with others, and find understanding in a safe, supportive environment.</p>
+<p>Share your experiences, connect with others, and find understanding in a safe, supportive environment with advanced conversation versioning.</p>
 <a href="#community" class="btn">Join Our Community</a>
 </div>
 </section>
@@ -679,10 +1145,15 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <div class="forum-header">
 <h2><i class="fas fa-comments"></i> Share Your Story & Find Support</h2>
 <p>Join our compassionate community of individuals supporting each other</p>
+<div class="community-stats">
+<span><i class="fas fa-users"></i> <span id="memberCount">127</span> Active Members</span>
+<span><i class="fas fa-comments"></i> <span id="postCount">0</span> Posts Today</span>
+<span><i class="fas fa-history"></i> Version Control Enabled</span>
+</div>
 </div>
 
-<div class="forum-posts">
-<div class="empty-community">
+<div class="forum-posts" id="forumPosts">
+<div class="empty-community" id="emptyCommunity">
 <i class="fas fa-comment-slash"></i>
 <h3>Be the first to share your experience</h3>
 <p>Your story can help others feel less alone. Start the conversation.</p>
@@ -693,13 +1164,56 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 <h3><i class="fas fa-pen"></i> Share Your Experience</h3>
 <form id="communityForm">
 <div class="form-group">
-<input type="text" placeholder="Title of your post" required>
+<input type="text" id="postTitle" placeholder="Title of your post" required>
 </div>
 <div class="form-group">
-<textarea placeholder="Share your thoughts, experiences, or ask for support..." required></textarea>
+<textarea id="postContent" placeholder="Share your thoughts, experiences, or ask for support..." required></textarea>
+</div>
+<div class="form-group">
+<label class="checkbox-label">
+<input type="checkbox" id="triggerWarning">
+<span class="checkmark"></span>
+This post contains sensitive content (trigger warning)
+</label>
 </div>
 <button type="submit" class="btn">Post to Community</button>
 </form>
+</div>
+</div>
+
+<!-- Version History Modal -->
+<div id="versionModal" class="modal">
+<div class="modal-content">
+<div class="modal-header">
+<h3>Post Version History</h3>
+<span class="close" onclick="closeVersionModal()">&times;</span>
+</div>
+<div class="modal-body" id="versionHistory">
+<!-- Version history will be populated here -->
+</div>
+</div>
+</div>
+
+<!-- User Chat Modal -->
+<div id="chatModal" class="modal">
+<div class="modal-content">
+<div class="modal-header">
+<h3 id="chatUserName">Private Chat</h3>
+<span class="close" onclick="closeChatModal()">&times;</span>
+</div>
+<div class="modal-body">
+<div class="chat-messages" id="chatMessages">
+<div class="chat-message">
+<div class="message-bubble">
+Hello! Thanks for reaching out. How can I support you today?
+</div>
+</div>
+</div>
+<div class="chat-input">
+<input type="text" id="chatInput" placeholder="Type your message...">
+<button onclick="sendChatMessage()"><i class="fas fa-paper-plane"></i></button>
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -821,14 +1335,18 @@ International: <a href="tel:+1-800-273-8255">+1-800-273-TALK</a>
 
 <div class="ai-chat-box" id="aiChatBox">
 <div class="ai-header">
-MindSupport Assistant
+MindSupport AI Assistant
+<div class="ai-status">🟢 Online & Ready to Help</div>
 </div>
 <div class="ai-messages" id="aiMessages">
 <div class="message ai-message">
-Hello! I'm your MindSupport assistant. How can I help you today? 😊
+Hello! I'm your advanced MindSupport assistant. I'm here to help with mental health resources, community support, and crisis intervention. 🤗
 </div>
-<div class="message ai-message">
-You can ask me about mental health resources, community guidelines, or how to get support.
+<div class="quick-actions">
+<div class="quick-action" data-action="crisis">🆘 Crisis Help</div>
+<div class="quick-action" data-action="community">👥 Community Guide</div>
+<div class="quick-action" data-action="resources">📚 Resources</div>
+<div class="quick-action" data-action="anonymous">🔒 Anonymous Support</div>
 </div>
 </div>
 <div class="ai-input">
@@ -839,125 +1357,667 @@ You can ask me about mental health resources, community guidelines, or how to ge
 </div>
 
 <script>
-// AI Assistant Functionality
+// Global Variables
+let posts = [];
+let postVersions = {};
+let currentUser = 'You';
+let postIdCounter = 1;
+let isAIThinking = false;
+
+// Community Forum Functionality
+document.getElementById('communityForm').addEventListener('submit', function(e) {
+e.preventDefault();
+
+const title = document.getElementById('postTitle').value;
+const content = document.getElementById('postContent').value;
+const triggerWarning = document.getElementById('triggerWarning').checked;
+
+if (title.trim() && content.trim()) {
+createNewPost(title, content, triggerWarning);
+this.reset();
+showNotification('Your experience has been shared successfully!', 'success');
+}
+});
+
+function createNewPost(title, content, triggerWarning) {
+const postId = postIdCounter++;
+const newPost = {
+id: postId,
+title: title,
+content: content,
+author: currentUser,
+triggerWarning: triggerWarning,
+timestamp: new Date(),
+version: 1,
+likes: Math.floor(Math.random() * 15),
+replies: []
+};
+
+posts.unshift(newPost);
+postVersions[postId] = [newPost];
+
+updatePostCount();
+renderPosts();
+
+// Hide empty community message
+document.getElementById('emptyCommunity').style.display = 'none';
+}
+
+function renderPosts() {
+const container = document.getElementById('forumPosts');
+const emptyMessage = document.getElementById('emptyCommunity');
+
+if (posts.length === 0) {
+emptyMessage.style.display = 'flex';
+return;
+} else {
+emptyMessage.style.display = 'none';
+}
+
+// Clear existing posts except empty message
+const existingPosts = container.querySelectorAll('.post-item');
+existingPosts.forEach(post => post.remove());
+
+posts.forEach(post => {
+const postElement = createPostElement(post);
+container.appendChild(postElement);
+});
+}
+
+function createPostElement(post) {
+const postDiv = document.createElement('div');
+postDiv.className = 'post-item';
+postDiv.innerHTML = `
+<div class="post-header">
+<div class="post-author">
+<div class="author-avatar">${post.author.charAt(0)}</div>
+<div class="post-info">
+<div class="post-author-name">${post.author}</div>
+<div class="post-meta">
+${formatTime(post.timestamp)} • Version ${post.version}
+<span class="version-badge">v${post.version}</span>
+${post.triggerWarning ? '<span class="warning-badge">⚠️ Trigger Warning</span>' : ''}
+</div>
+</div>
+</div>
+<button class="action-btn" onclick="showVersionHistory(${post.id})" title="View Version History">
+<i class="fas fa-history"></i>
+</button>
+</div>
+<div class="post-title">${post.title}</div>
+<div class="post-content">${post.content}</div>
+<div class="post-actions">
+<button class="action-btn" onclick="toggleLike(${post.id})">
+<i class="fas fa-heart"></i> <span id="likes-${post.id}">${post.likes}</span>
+</button>
+<button class="action-btn" onclick="toggleReply(${post.id})">
+<i class="fas fa-comment"></i> Reply
+</button>
+<button class="action-btn" onclick="editPost(${post.id})">
+<i class="fas fa-edit"></i> Edit
+</button>
+<button class="action-btn" onclick="openPrivateChat('${post.author}')">
+<i class="fas fa-envelope"></i> Message
+</button>
+<button class="action-btn" onclick="reportPost(${post.id})">
+<i class="fas fa-flag"></i> Report
+</button>
+</div>
+<div class="reply-section" id="reply-${post.id}">
+<div class="reply-input">
+<input type="text" placeholder="Write a supportive reply..." id="reply-input-${post.id}">
+<button class="btn btn-secondary" onclick="addReply(${post.id})">Reply</button>
+</div>
+<div class="replies" id="replies-${post.id}">
+${post.replies.map(reply => `
+<div class="reply-item">
+<div class="post-author">
+<div class="author-avatar">${reply.author.charAt(0)}</div>
+<div class="post-info">
+<div class="post-author-name">${reply.author}</div>
+<div class="post-meta">${formatTime(reply.timestamp)}</div>
+</div>
+</div>
+<div>${reply.content}</div>
+</div>
+`).join('')}
+</div>
+</div>
+`;
+return postDiv;
+}
+
+function toggleLike(postId) {
+const post = posts.find(p => p.id === postId);
+if (post) {
+post.likes++;
+document.getElementById(`likes-${postId}`).textContent = post.likes;
+const btn = event.target.closest('.action-btn');
+btn.classList.add('liked');
+setTimeout(() => btn.classList.remove('liked'), 2000);
+}
+}
+
+function toggleReply(postId) {
+const replySection = document.getElementById(`reply-${postId}`);
+replySection.style.display = replySection.style.display === 'block' ? 'none' : 'block';
+}
+
+function addReply(postId) {
+const input = document.getElementById(`reply-input-${postId}`);
+const content = input.value.trim();
+if (content) {
+const post = posts.find(p => p.id === postId);
+if (post) {
+const reply = {
+id: Date.now(),
+author: currentUser,
+content: content,
+timestamp: new Date()
+};
+post.replies.push(reply);
+input.value = '';
+renderPosts();
+showNotification('Reply added successfully!', 'success');
+}
+}
+}
+
+function editPost(postId) {
+const post = posts.find(p => p.id === postId);
+if (post && post.author === currentUser) {
+const newTitle = prompt('Edit title:', post.title);
+const newContent = prompt('Edit content:', post.content);
+if (newTitle && newContent && (newTitle !== post.title || newContent !== post.content)) {
+// Create new version
+const newVersion = {
+...post,
+title: newTitle,
+content: newContent,
+version: post.version + 1,
+timestamp: new Date()
+};
+// Update post
+const postIndex = posts.findIndex(p => p.id === postId);
+posts[postIndex] = newVersion;
+// Add to version history
+postVersions[postId].unshift(newVersion);
+renderPosts();
+showNotification('Post updated! Version history saved.', 'success');
+}
+}
+}
+
+function showVersionHistory(postId) {
+const versions = postVersions[postId] || [];
+const modal = document.getElementById('versionModal');
+const historyContainer = document.getElementById('versionHistory');
+
+historyContainer.innerHTML = '';
+
+versions.forEach((version, index) => {
+const versionDiv = document.createElement('div');
+versionDiv.className = 'version-item';
+versionDiv.innerHTML = `
+<div class="version-header">
+<span class="version-number">Version ${version.version}</span>
+<span class="version-date">${formatTime(version.timestamp)}</span>
+${index === 0 ? '<span class="current-version">Current</span>' : ''}
+</div>
+<div class="post-title">${version.title}</div>
+<div class="post-content">${version.content}</div>
+`;
+historyContainer.appendChild(versionDiv);
+});
+
+modal.style.display = 'block';
+}
+
+function closeVersionModal() {
+document.getElementById('versionModal').style.display = 'none';
+}
+
+function openPrivateChat(username) {
+document.getElementById('chatUserName').textContent = `Chat with ${username}`;
+document.getElementById('chatModal').style.display = 'block';
+}
+
+function closeChatModal() {
+document.getElementById('chatModal').style.display = 'none';
+}
+
+function sendChatMessage() {
+const input = document.getElementById('chatInput');
+const message = input.value.trim();
+if (message) {
+addChatMessage(message, true);
+input.value = '';
+// Simulate response
+setTimeout(() => {
+addChatMessage("Thank you for reaching out. I appreciate you taking the time to connect. How are you feeling today?", false);
+}, 1000);
+}
+}
+
+function addChatMessage(message, isOwn) {
+const container = document.getElementById('chatMessages');
+const messageDiv = document.createElement('div');
+messageDiv.className = `chat-message ${isOwn ? 'own' : ''}`;
+messageDiv.innerHTML = `<div class="message-bubble">${message}</div>`;
+container.appendChild(messageDiv);
+container.scrollTop = container.scrollHeight;
+}
+
+function reportPost(postId) {
+showNotification('Post reported to moderation team. Thank you for keeping our community safe.', 'info');
+}
+
+function updatePostCount() {
+document.getElementById('postCount').textContent = posts.length;
+}
+
+function formatTime(date) {
+const now = new Date();
+const diff = Math.floor((now - date) / 1000);
+if (diff < 60) return 'Just now';
+if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
+if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
+return `${Math.floor(diff / 86400)} days ago`;
+}
+
+// Advanced AI Assistant
 const aiToggle = document.getElementById('aiToggle');
 const aiChatBox = document.getElementById('aiChatBox');
 const aiMessages = document.getElementById('aiMessages');
 const userInput = document.getElementById('userInput');
 const sendBtn = document.getElementById('sendMessage');
 
-// Toggle chat box visibility
+// Toggle chat box
 aiToggle.addEventListener('click', () => {
-aiChatBox.style.display = aiChatBox.style.display === 'flex' ? 'none' : 'flex';
+const isVisible = aiChatBox.style.display === 'flex';
+aiChatBox.style.display = isVisible ? 'none' : 'flex';
+if (!isVisible) {
+userInput.focus();
+}
 });
 
 // Send message functionality
-sendBtn.addEventListener('click', sendMessage);
+sendBtn.addEventListener('click', sendAIMessage);
 userInput.addEventListener('keypress', (e) => {
-if (e.key === 'Enter') sendMessage();
+if (e.key === 'Enter' && !e.shiftKey) {
+e.preventDefault();
+sendAIMessage();
+}
 });
 
-function sendMessage() {
+// Quick actions
+document.querySelectorAll('.quick-action').forEach(action => {
+action.addEventListener('click', (e) => {
+const actionType = e.target.dataset.action;
+handleQuickAction(actionType);
+});
+});
+
+function sendAIMessage() {
 const message = userInput.value.trim();
-if (message) {
-// Add user message to chat
-addMessage(message, 'user');
+if (message && !isAIThinking) {
+addAIMessage(message, 'user');
 userInput.value = '';
+sendBtn.disabled = true;
+isAIThinking = true;
 
-// Process message and generate AI response
+// Show typing indicator
+showTypingIndicator();
+
+// Process message and generate response
 setTimeout(() => {
-const response = generateAIResponse(message);
-addMessage(response, 'ai');
-}, 800);
+hideTypingIndicator();
+const response = generateAdvancedAIResponse(message);
+addAIMessage(response.text, 'ai');
+if (response.actions) {
+addQuickActions(response.actions);
+}
+sendBtn.disabled = false;
+isAIThinking = false;
+userInput.focus();
+}, 1500 + Math.random() * 1000);
 }
 }
 
-function addMessage(text, sender) {
+function addAIMessage(text, sender) {
 const messageDiv = document.createElement('div');
 messageDiv.classList.add('message');
 messageDiv.classList.add(sender === 'user' ? 'user-message' : 'ai-message');
-messageDiv.textContent = text;
+messageDiv.innerHTML = text;
 aiMessages.appendChild(messageDiv);
-
-// Scroll to bottom
 aiMessages.scrollTop = aiMessages.scrollHeight;
 }
 
-function generateAIResponse(message) {
+function showTypingIndicator() {
+const typingDiv = document.createElement('div');
+typingDiv.classList.add('message', 'typing-indicator');
+typingDiv.id = 'typing-indicator';
+typingDiv.innerHTML = `
+<div class="typing-dots">
+<span></span><span></span><span></span>
+</div>
+`;
+aiMessages.appendChild(typingDiv);
+aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+function hideTypingIndicator() {
+const typingIndicator = document.getElementById('typing-indicator');
+if (typingIndicator) {
+typingIndicator.remove();
+}
+}
+
+function addQuickActions(actions) {
+const actionsDiv = document.createElement('div');
+actionsDiv.classList.add('quick-actions');
+actionsDiv.innerHTML = actions.map(action => 
+`<div class="quick-action" onclick="handleSuggestedAction('${action.type}')">${action.text}</div>`
+).join('');
+aiMessages.appendChild(actionsDiv);
+aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+function handleQuickAction(actionType) {
+switch(actionType) {
+case 'crisis':
+addAIMessage('🆘 Crisis Help', 'user');
+setTimeout(() => {
+addAIMessage(`<strong>🚨 IMMEDIATE CRISIS SUPPORT 🚨</strong><br><br>
+If you're having thoughts of self-harm or suicide, please reach out immediately:<br><br>
+📞 <strong>988 Suicide & Crisis Lifeline</strong><br>
+📱 <strong>Text HOME to 741741</strong><br>
+🌍 <strong>International: +1-800-273-TALK</strong><br><br>
+🏥 <strong>Emergency Services: 911</strong><br><br>
+You are not alone. These services are available 24/7 and staffed by trained counselors who want to help you through this difficult time.`, 'ai');
+}, 1000);
+break;
+case 'community':
+addAIMessage('👥 Community Guide', 'user');
+setTimeout(() => {
+addAIMessage(`Welcome to our supportive community! Here's how to get started:<br><br>
+✅ <strong>Share Your Story:</strong> Use the post form to share your experiences<br>
+🔄 <strong>Version Control:</strong> Edit your posts anytime - we keep a history<br>
+💬 <strong>Connect:</strong> Reply to posts and send private messages<br>
+⚠️ <strong>Trigger Warnings:</strong> Use them for sensitive content<br>
+🛡️ <strong>Stay Safe:</strong> Report concerning content and follow guidelines<br><br>
+Remember: Share from your own experience and be kind to others. We're all here to support each other! 🤗`, 'ai');
+}, 1000);
+break;
+case 'resources':
+addAIMessage('📚 Resources', 'user');
+setTimeout(() => {
+addAIMessage(`Here are valuable mental health resources:<br><br>
+🧠 <strong>Mental Health:</strong><br>
+• NAMI (National Alliance on Mental Illness)<br>
+• Psychology Today therapist finder<br>
+• Mindfulness and meditation apps<br><br>
+📞 <strong>Support Lines:</strong><br>
+• Crisis Text Line: Text HOME to 741741<br>
+• SAMHSA National Helpline: 1-800-662-4357<br><br>
+🏥 <strong>Professional Help:</strong><br>
+• Contact: 224173@ais.edu.hk<br>
+• Phone: 5958 2902<br>
+• Hours: Mon-Fri 9am-6pm, Sat 10am-4pm`, 'ai');
+}, 1000);
+break;
+case 'anonymous':
+addAIMessage('🔒 Anonymous Support', 'user');
+setTimeout(() => {
+addAIMessage(`Your privacy and safety are our top priorities:<br><br>
+🔒 <strong>Anonymous Posting:</strong> Use any name you prefer<br>
+🛡️ <strong>No Personal Info Required:</strong> Share only what you're comfortable with<br>
+👁️ <strong>Content Moderation:</strong> All posts reviewed for safety<br>
+🚫 <strong>No Judgment Zone:</strong> We enforce strict anti-harassment policies<br><br>
+You can participate in our community while maintaining complete anonymity. Your mental health journey is yours to share as much or as little as you choose. 💙`, 'ai');
+}, 1000);
+break;
+}
+}
+
+function generateAdvancedAIResponse(message) {
 const lowerMsg = message.toLowerCase();
 
-// Greetings
+// Crisis detection - highest priority
+const crisisKeywords = ['suicide', 'kill myself', 'end it all', 'want to die', 'harm myself', 'can\'t go on', 'no hope'];
+if (crisisKeywords.some(keyword => lowerMsg.includes(keyword))) {
+return {
+text: `<strong>🚨 I'm very concerned about you right now.</strong><br><br>
+Please reach out for immediate help:<br>
+📞 <strong>Call 988 (Suicide & Crisis Lifeline)</strong><br>
+📱 <strong>Text HOME to 741741</strong><br>
+🏥 <strong>Or call 911 for emergency services</strong><br><br>
+You matter, and there are people who want to help you through this. Please don't face this alone. 💙`,
+actions: [
+{type: 'crisis', text: '🆘 More Crisis Resources'},
+{type: 'professional', text: '👨‍⚕️ Professional Help'}
+]
+};
+}
+
+// Anxiety/Depression support
+if (lowerMsg.includes('anxious') || lowerMsg.includes('anxiety') || lowerMsg.includes('panic')) {
+return {
+text: `I understand anxiety can be overwhelming. Here are some immediate coping strategies:<br><br>
+🌬️ <strong>Deep Breathing:</strong> 4-7-8 technique (inhale 4, hold 7, exhale 8)<br>
+🧘 <strong>Grounding:</strong> Name 5 things you see, 4 you hear, 3 you touch<br>
+💪 <strong>Progressive Muscle Relaxation:</strong> Tense and release muscle groups<br><br>
+Remember: Anxiety is treatable, and you're taking a brave step by reaching out. 🤗`,
+actions: [
+{type: 'breathing', text: '🌬️ Breathing Exercise'},
+{type: 'community', text: '👥 Connect with Others'},
+{type: 'resources', text: '📚 Anxiety Resources'}
+]
+};
+}
+
+if (lowerMsg.includes('depressed') || lowerMsg.includes('depression') || lowerMsg.includes('sad')) {
+return {
+text: `I hear you, and I want you to know that what you're feeling is valid. Depression is challenging, but you're not alone:<br><br>
+☀️ <strong>Small Steps Count:</strong> Even tiny accomplishments matter<br>
+🤝 <strong>Reach Out:</strong> Connect with friends, family, or our community<br>
+🏃 <strong>Gentle Movement:</strong> Even a short walk can help<br>
+😴 <strong>Sleep & Nutrition:</strong> Basic self-care is important<br><br>
+Consider speaking with a mental health professional. You deserve support and healing. 💙`,
+actions: [
+{type: 'community', text: '👥 Community Support'},
+{type: 'resources', text: '📞 Professional Help'},
+{type: 'selfcare', text: '🌱 Self-Care Tips'}
+]
+};
+}
+
+// Community questions
+if (lowerMsg.includes('how to post') || lowerMsg.includes('community') || lowerMsg.includes('forum')) {
+return {
+text: `Great question! Here's how to participate in our community:<br><br>
+📝 <strong>Create Posts:</strong> Use the form below to share your experiences<br>
+🔄 <strong>Edit Safely:</strong> All edits are version-controlled<br>
+💬 <strong>Reply & Support:</strong> Engage with others' posts<br>
+💌 <strong>Private Messages:</strong> Connect directly with other members<br><br>
+Your story could help someone else feel less alone. What would you like to share? 🌟`,
+actions: [
+{type: 'post-guide', text: '📝 Posting Guide'},
+{type: 'guidelines', text: '📋 Community Rules'}
+]
+};
+}
+
+// Medication/therapy questions
+if (lowerMsg.includes('medication') || lowerMsg.includes('therapy') || lowerMsg.includes('therapist')) {
+return {
+text: `These are important questions about professional treatment:<br><br>
+👨‍⚕️ <strong>Professional Guidance:</strong> Only qualified healthcare providers should advise on medication or therapy<br>
+🔍 <strong>Finding Help:</strong> Psychology Today and our resources can help you find local providers<br>
+💰 <strong>Insurance/Cost:</strong> Many insurance plans cover mental health services<br><br>
+Our community can share experiences, but please consult professionals for medical advice. You can contact our support team at 224173@ais.edu.hk for guidance on finding help.`,
+actions: [
+{type: 'resources', text: '📚 Professional Resources'},
+{type: 'insurance', text: '💰 Cost & Insurance Info'}
+]
+};
+}
+
+// Loneliness/isolation
+if (lowerMsg.includes('lonely') || lowerMsg.includes('alone') || lowerMsg.includes('isolated')) {
+return {
+text: `Feeling lonely is incredibly difficult, and I'm glad you reached out. You've already taken a brave step:<br><br>
+👥 <strong>You're Not Alone:</strong> Our community of 127+ members understands<br>
+💬 <strong>Start Small:</strong> Even one reply in our forum creates connection<br>
+📱 <strong>Virtual Support:</strong> Online connections can be just as meaningful<br>
+🤝 <strong>Local Resources:</strong> We can help you find local support groups<br><br>
+Loneliness is temporary, even when it doesn't feel that way. 🌟`,
+actions: [
+{type: 'community', text: '👥 Join Community'},
+{type: 'chat', text: '💬 Start a Conversation'},
+{type: 'local', text: '📍 Local Support Groups'}
+]
+};
+}
+
+// General greetings and support
 if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
-return "Hello! How can I assist you with your mental wellness today? 😊";
+return {
+text: `Hello! Welcome to MindSupport. I'm here to provide compassionate, informed support for your mental health journey. 🤗<br><br>
+How are you feeling today? I can help with:<br>
+• Crisis support and resources<br>
+• Community guidance<br>
+• Mental health information<br>
+• Connecting you with professional help<br><br>
+What would be most helpful for you right now?`,
+actions: [
+{type: 'crisis', text: '🆘 Crisis Support'},
+{type: 'community', text: '👥 Community Help'},
+{type: 'resources', text: '📚 Resources'},
+{type: 'anonymous', text: '🔒 Anonymous Chat'}
+]
+};
 }
 
-// Community guidelines
-if (lowerMsg.includes('guideline') || lowerMsg.includes('rule') || lowerMsg.includes('policy')) {
-return "Our community guidelines emphasize respect, confidentiality, and safety. You can find the complete guidelines in the 'Community Guidelines' section of our website.";
-}
-
-// Contact
-if (lowerMsg.includes('contact') || lowerMsg.includes('email') || lowerMsg.includes('phone')) {
-return "You can reach us by phone at 5958 2902 or by email at 224173@ais.edu.hk. Our support team is available Monday-Friday 9am-6pm.";
-}
-
-// Safety
-if (lowerMsg.includes('safe') || lowerMsg.includes('report') || lowerMsg.includes('concern')) {
-return "Your safety is important. You can report concerning content using our reporting tools. For immediate safety concerns, please contact emergency services.";
-}
-
-// Crisis
-if (lowerMsg.includes('emergency') || lowerMsg.includes('crisis') || lowerMsg.includes('urgent')) {
-return "If you're in crisis, please call 988 or your local emergency number immediately. You can also text HOME to 741741 for crisis support.";
-}
-
-// Community
-if (lowerMsg.includes('community') || lowerMsg.includes('forum') || lowerMsg.includes('post')) {
-return "Our community forum is a safe space to share experiences. You can post your thoughts or questions in the 'Community Support' section. All posts are moderated for safety.";
-}
-
-// Default response
+// Default empathetic response
 const responses = [
-"I'm here to help with your mental wellness journey. Can you tell me more about what you need?",
-"I understand. Would you like information about our community guidelines or support resources?",
-"Mental health is important. We have various support options available. How can I assist you?",
-"Thank you for reaching out. Our team is available at 224173@ais.edu.hk if you need human support.",
-"I recommend checking our community guidelines for information on safe participation."
+"Thank you for sharing with me. Your feelings are valid, and I'm here to support you. Can you tell me more about what's on your mind?",
+"I hear you, and I want you to know that reaching out shows real strength. What kind of support would be most helpful right now?",
+"It sounds like you're going through something difficult. Our community and resources are here for you. How can I best help today?",
+"I appreciate you trusting me with this. Mental health challenges are real, and you deserve support. What would feel most supportive right now?"
 ];
-return responses[Math.floor(Math.random() * responses.length)];
+
+return {
+text: responses[Math.floor(Math.random() * responses.length)],
+actions: [
+{type: 'crisis', text: '🆘 Crisis Help'},
+{type: 'community', text: '👥 Community Support'},
+{type: 'resources', text: '📚 Mental Health Resources'}
+]
+};
 }
 
-// Form submission
-document.getElementById('communityForm').addEventListener('submit', function(e) {
-e.preventDefault();
-alert('Thank you for sharing with our community! Your post is being reviewed and will be visible soon.');
-this.reset();
+function handleSuggestedAction(actionType) {
+// Handle suggested actions from AI responses
+switch(actionType) {
+case 'breathing':
+addAIMessage('🌬️ Breathing Exercise', 'user');
+setTimeout(() => {
+addAIMessage(`Let's do a calming breathing exercise together:<br><br>
+<strong>4-7-8 Breathing Technique:</strong><br>
+1️⃣ <strong>Inhale</strong> through your nose for 4 counts<br>
+2️⃣ <strong>Hold</strong> your breath for 7 counts<br>
+3️⃣ <strong>Exhale</strong> through your mouth for 8 counts<br><br>
+Repeat this 3-4 times. Take your time and focus on the counting. You're doing great! 🌟`, 'ai');
+}, 1000);
+break;
+case 'selfcare':
+addAIMessage('🌱 Self-Care Tips', 'user');
+setTimeout(() => {
+addAIMessage(`Here are gentle self-care ideas for difficult days:<br><br>
+🛁 <strong>Comfort:</strong> Warm bath, cozy blanket, favorite tea<br>
+🎵 <strong>Sensory:</strong> Calming music, nature sounds, aromatherapy<br>
+📱 <strong>Connection:</strong> Text a friend, pet an animal, join our community<br>
+🌿 <strong>Nature:</strong> Step outside, tend to a plant, watch the sky<br>
+📝 <strong>Expression:</strong> Journal, draw, or share in our forum<br><br>
+Self-care isn't selfish - it's necessary. Start with what feels manageable today. 💚`, 'ai');
+}, 1000);
+break;
+default:
+handleQuickAction(actionType);
+}
+}
 
-// Update community section
-document.querySelector('.empty-community').innerHTML = `
-<i class="fas fa-check-circle" style="color:#2ecc71"></i>
-<h3>Thank you for your post!</h3>
-<p>Your contribution is being reviewed and will be visible to the community soon.</p>
+// Notification system
+function showNotification(message, type = 'info') {
+const notification = document.createElement('div');
+notification.style.cssText = `
+position: fixed;
+top: 20px;
+right: 20px;
+z-index: 3000;
+padding: 15px 20px;
+border-radius: 8px;
+color: white;
+font-weight: 500;
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+animation: slideIn 0.3s ease;
+max-width: 300px;
 `;
-});
 
-// Smooth scrolling for navigation
+switch(type) {
+case 'success':
+notification.style.background = 'linear-gradient(135deg, #2ecc71, #27ae60)';
+break;
+case 'error':
+notification.style.background = 'linear-gradient(135deg, #e74c3c, #c0392b)';
+break;
+default:
+notification.style.background = 'linear-gradient(135deg, #3498db, #2980b9)';
+}
+
+notification.innerHTML = `
+<div style="display: flex; align-items: center; gap: 10px;">
+<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+${message}
+</div>
+`;
+
+document.body.appendChild(notification);
+
+setTimeout(() => {
+notification.style.animation = 'slideOut 0.3s ease';
+setTimeout(() => notification.remove(), 300);
+}, 3000);
+}
+
+// Smooth scrolling
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 anchor.addEventListener('click', function(e) {
 e.preventDefault();
 const target = document.querySelector(this.getAttribute('href'));
 if (target) {
-window.scrollTo({
-top: target.offsetTop - 100,
-behavior: 'smooth'
-});
-
-// Close AI chat if open
+target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 aiChatBox.style.display = 'none';
 }
 });
 });
 
+// Close modals when clicking outside
+window.addEventListener('click', function(e) {
+const versionModal = document.getElementById('versionModal');
+const chatModal = document.getElementById('chatModal');
+
+if (e.target === versionModal) {
+closeVersionModal();
+}
+if (e.target === chatModal) {
+closeChatModal();
+}
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
 // Animation on scroll
 const observerOptions = {
 root: null,
@@ -974,12 +2034,35 @@ entry.target.style.transform = 'translateY(0)';
 });
 }, observerOptions);
 
-document.querySelectorAll('.service-card, .policy-card, .contact-info').forEach(el => {
+document.querySelectorAll('.policy-card, .contact-info').forEach(el => {
 el.style.opacity = '0';
 el.style.transform = 'translateY(20px)';
 el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
 observer.observe(el);
 });
+
+// Show welcome message after delay
+setTimeout(() => {
+showNotification('Welcome to MindSupport! Our AI assistant is ready to help 24/7.', 'info');
+}, 2000);
+});
+
+// Add CSS animations
+const style = document.createElement('style');
+style.textContent = `
+@keyframes slideIn {
+from { transform: translateX(100%); opacity: 0; }
+to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOut {
+from { transform: translateX(0); opacity: 1; }
+to { transform: translateX(100%); opacity: 0; }
+}
+`;
+document.head.appendChild(style);
 </script>
 </body>
 </html>
+
+
